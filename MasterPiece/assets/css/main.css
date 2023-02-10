@@ -31,7 +31,7 @@ body {
 body img {
   max-width: 100%;
 }
-
+.noCatsLogo{width: 50px; height: 50px;}
 a {
   cursor: pointer;
   text-decoration: none;
@@ -1464,7 +1464,7 @@ html, body {
 
 input[type="submit"] {
   background-color: #861523;
-  color: #051922;
+  color: White;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 15px;
@@ -2165,7 +2165,7 @@ a.video-play-btn {
 }
 
 .feature-bg:after {
-  background-image: url(../img/feature-bg.jpg);
+  background-image: url(../img/AboutUsSmallPic.jpg);
   position: absolute;
   right: 0;
   top: 0;
@@ -2317,9 +2317,9 @@ ul.social-link-team li a {
 .contact-form-wrap .contact-form-box:last-child {
   margin: 0;
 }
-
+.find-location{background-color: #EDEDED;}
 .find-location p {
-  color: #fff;
+  color: black;
   font-size: 40px;
   margin: 0;
   font-weight: 600;
@@ -2422,12 +2422,14 @@ ul.social-link-team li a {
 }
 
 .product-image {
+
   padding: 30px;
   padding-bottom: 0;
 }
 
 .product-image img {
-  width: 90%;
+  width: 250px;
+  height: 250px;
   border-radius: 5px;
   margin-bottom: 20px;
 }
