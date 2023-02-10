@@ -1,58 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="assets/css/SignUp.css"
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-           <div class="row g-0">
-              <div class="col-md-6">
-                 <div class="h-100 d-flex justify-content-center align-items-center">
-                    <div class="py-4 px-3">
-                       <h4>Signup</h4>
-                       <div class="row g-2 mt-1">
-                          <div class="col-md-6">
-                             <div class="input-field"> <input class="form-control" id="input1" required> <label for="input1">First Name</label> </div>
-                          </div>
-                          <div class="col-md-6">
-                             <div class="input-field"> <input class="form-control" id="input2" required> <label for="input2">Last Name</label> </div>
-                          </div>
-                       </div>
-                       <div class="row mt-2">
-                          <div class="col-md-12">
-                             <div class="input-field"> <input class="form-control" id="input3" required> <label for="input3">Email</label> </div>
-                          </div>
-                       </div>
-                       <div class="row mt-2 mb-2">
-                          <div class="col-md-12">
-                             <div class="input-field"> <input class="form-control" id="input4" required> <label for="input4">Password</label> </div>
-                          </div>
-                       </div>
-                       <span class="">Password must be atleast 8 characters</span> 
-                       <div class="row mt-2">
-                          <div class="col-md-12"> <button class="btn btn-primary w-100 signup-button">Signup</button> </div>
-                       </div>
-                       <div class="member mt-1"> <span>Already a member?</span> <a class="text-decoration-none" href="#">Signin</a> </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="col-md-6">
-                 <div class="right-side-content">
-                    <div class="content d-flex flex-column">
-                       <h6>Explore you activity</h6>
-                       <span>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span> 
-                    </div>
-                    <div class="right-side"> <span></span> <span></span> <span></span> <span></span> <span><img src="assets/img/AboutUsSmallPic.jpg"> </span> <span></span> <span></span> <span></span> <span> <img src="https://i.imgur.com/U0863iD.jpg"> </span> <span></span> </div>
-                 </div>
-              </div>
-           </div>
-        </div>
-        <div class="parallelogram"> <span></span> <span></span> <span></span> </div>
-     </div>
-</body>
+<!doctype html>
+<html lang="en" style="height: 100%;">
+  <head>
+  	<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="assets/img/noCatsLogo.png">
+
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="LoginStyles/css/style.css">
+
+	</head>
+	<body class="img js-fullheight" style="background-image: url(LoginStyles/images/Test5.jpg);">
+		<div class="w-90 text-center">
+			<a href="index.html">
+			<img src="assets/img/noCatsLogo.png" style="width: 70px; height: 70px; margin-top: 20px;">
+			</a>
+		</div>
+		
+		<div class="container" style="margin-top: -30px;">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section"></h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h2 class="mb-4 text-center" style="color: white;">Sign Up</h2>
+		      	<form action="#" class="signin-form">
+                  <div class="form-group">
+                     <input type="text" class="form-control" placeholder="First Name" required>
+                  </div>
+                  <div class="form-group">
+                     <input type="text" class="form-control" placeholder="Last Name" required>
+                  </div>
+		      		<div class="form-group">
+		      			<input type="text" class="form-control" placeholder="Email" required>
+		      		</div>
+	            <div class="form-group">
+	              <input id="password-field" type="password" class="form-control" placeholder="Password" required>
+	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+	            </div>
+               <div class="form-group">
+                  <input id="password-field" type="password" class="form-control" placeholder="Confirm Password" required>
+                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                </div>
+               
+               <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Phone" required>
+               </div>
+	            <div class="form-group">
+	            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+	            </div>
+               <div class="form-group"><p class="w-90 text-center">Already Have An Account ? <a href="Login.html" style="color:#861523; font-weight: bolder;"> Login</a></p>
+               </div>
+
+
+	          </form>
+
+	          
+               
+            </div>
+
+            
+         </div>
+         
+      </div>
+      
+   </div>
+   
+	<script src="LoginStyles/js/jquery.min.js"></script>
+  <script src="LoginStyles/js/popper.js"></script>
+  <script src="LoginStyles/js/bootstrap.min.js"></script>
+  <script src="LoginStyles/js/main.js"></script>
+
+	</body>
 </html>
+
