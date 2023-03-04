@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MasterPiece.Models.Store>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .thumbnail {
+        top: -50px;
+        left: -35px;
+        display: block;
+        z-index: 999;
+        cursor: pointer;
+        -webkit-transition-property: all;
+        -webkit-transition-duration: 0.7s;
+        -webkit-transition-timing-function: ease;
+    }
+        /*change the number below to scale to the appropriate size*/
+        .thumbnail:hover {
+            transform: scale(3);
+        }
+</style>
+
+<div style="text-align:center">
+    <h2>Stores</h2>
+</div>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Products</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+
+                                <th scope="col">Store Name Color</th>
+                                <th scope="col">Owner</th>
+                                <th scope="col">Image</th>
+
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int counter = 1; }
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>@counter</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Store_Name)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Store_Color)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Owner_Name)
+                                    </td>
+                                    <td>
+                                        <img src="../AdminContent/CategoryImages/@item.Store_Image" class="thumbnail" width="50px" height="50px" />
+                                    </td>
+                                    <td>
+
+                                        @Html.ActionLink("Details", "Details", new { id = item.Store_id })
+
+                                    </td>
+                                </tr>
+                                counter++;
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

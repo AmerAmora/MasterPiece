@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MasterPiece.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>Users</h2>
+</div>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Products</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </th>
+
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                                    </th>
+                                    <th>
+                                        First Name
+                                    </th>
+                                    <th>
+                                    Last Name                                    
+                                    </th>
+
+                                   
+                                </tr>
+                        </thead>
+                        <tbody>
+                            @{ int counter = 1; }
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@counter</td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.first_Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.last_Name)
+                                    </td>
+                                  
+                                </tr>
+                                counter++;
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

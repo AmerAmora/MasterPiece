@@ -13,10 +13,10 @@ namespace MasterPiece.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MasterpieceEntities : DbContext
+    public partial class MasterPieceEntities : DbContext
     {
-        public MasterpieceEntities()
-            : base("name=MasterpieceEntities")
+        public MasterPieceEntities()
+            : base("name=MasterPieceEntities")
         {
         }
     
@@ -29,6 +29,7 @@ namespace MasterPiece.Models
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<cart> carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }

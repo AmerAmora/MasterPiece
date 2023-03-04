@@ -25,7 +25,12 @@ namespace MasterPiece.Models
         public string Store_Image { get; set; }
         public string Store_Color { get; set; }
         public string Owner_Name { get; set; }
+        public Nullable<bool> isAccepted { get; set; }
+        public Nullable<bool> isBlocked { get; set; }
+        public string userId { get; set; }
+        public string Commercial_Record { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

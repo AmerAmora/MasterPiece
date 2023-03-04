@@ -171,9 +171,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +191,9 @@
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>NoCats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserRole.cs">
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\cart.cs">
@@ -534,13 +540,6 @@
     <Content Include="LoginStyles\scss\bootstrap\_utilities.scss" />
     <Content Include="LoginStyles\scss\bootstrap\_variables.scss" />
     <Content Include="LoginStyles\scss\style.scss" />
-    <EntityDeploy Include="Models\NoCats.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NoCats.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\NoCats.edmx.diagram">
-      <DependentUpon>NoCats.edmx</DependentUpon>
-    </Content>
     <Content Include="AdminContent\lib\owlcarousel\LICENSE" />
     <Content Include="AdminContent\lib\waypoints\links.php" />
     <Content Include="AdminContent\scss\bootstrap.scss" />
@@ -625,6 +624,13 @@
     <Content Include="AdminContent\scss\bootstrap\scss\_type.scss" />
     <Content Include="AdminContent\scss\bootstrap\scss\_utilities.scss" />
     <Content Include="AdminContent\scss\bootstrap\scss\_variables.scss" />
+    <EntityDeploy Include="Models\NoCats.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NoCats.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\NoCats.edmx.diagram">
+      <DependentUpon>NoCats.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -677,6 +683,22 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Stores\Create.cshtml" />
+    <Content Include="Views\Stores\Delete.cshtml" />
+    <Content Include="Views\Stores\Details.cshtml" />
+    <Content Include="Views\Stores\Edit.cshtml" />
+    <Content Include="Views\Stores\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\Account\ShopRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />

@@ -1,0 +1,71 @@
+﻿@model MasterPiece.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>Creating a new Product</h2>
+</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 10vh;">
+        <div class="col-12 col-sm-8 col-md-10 col-lg-10 col-xl-8">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a href="index.html" class="">
+                        <h3 class="text-primary"><img src="../../AdminContent/img/noCatsLogo.png" width="50px" height="50px"> NoCats</h3>
+                    </a>
+                    <h3>Add Product</h3>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="Product_Name" name="Product_Name" placeholder="jhondoe">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Product_Name" data-valmsg-replace="true"></span>
+
+                    <label for="floatingText">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="Number" class="form-control" data-val="true" data-val-number="The field Product_Price must be a number." id="Product_Price" name="Product_Price" placeholder="price">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Product_Price" data-valmsg-replace="true"></span>
+
+                    <label for="floatingText">Price</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="Number" class="form-control" data-val="true" data-val-number="The field Quantity must be a number." id="Quantity" name="Quantity" placeholder="price">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Product_Price" data-valmsg-replace="true"></span>
+
+                    <label for="floatingText">Quantity</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="Product_Description" name="Product_Description" placeholder="jhondoe">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Product_Description" data-valmsg-replace="true"></span>
+                    <label for="floatingText">Description</label>
+                </div>
+                        @Html.DropDownList("Store_id", null, htmlAttributes: new { @class = "form-control bg-dark",@style="height:50px" })
+                        @Html.ValidationMessageFor(model => model.Store_id, "", new { @class = "text-danger" })
+                <br />
+                        @Html.DropDownList("Category_id", null, htmlAttributes: new { @class = "form-control bg-dark", @style = "height:50px" })
+                        @Html.ValidationMessageFor(model => model.Category_id, "", new { @class = "text-danger" })
+                <br />
+
+                <input type="file" class="form-control bg-dark" id="Product_Image" name="Product_Image" accept="image/*">
+                <span class="field-validation-valid text-danger" data-valmsg-for="Product_Image" data-valmsg-replace="true"></span>
+
+                <BR />
+
+                <button type="submit" class="btn btn-primary py-3 w-100 mb-4">ADD PRODUCT</button>
+                <div style="float:right">
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+}
+

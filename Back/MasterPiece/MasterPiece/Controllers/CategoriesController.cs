@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using MasterPiece.Models;
+using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MasterPiece.Models;
 
 namespace MasterPiece.Controllers
 {
     public class CategoriesController : Controller
     {
-        private MasterpieceEntities db = new MasterpieceEntities();
+        private MasterPieceEntities db = new MasterPieceEntities();
 
         // GET: Categories
         public async Task<ActionResult> Index()
@@ -50,8 +48,9 @@ namespace MasterPiece.Controllers
         public async Task<ActionResult> Create([Bind(Include = "Category_id,Category_Name,Category_Image")] Category category, HttpPostedFileBase Category_Image)
         {
             if (ModelState.IsValid)
-            {Guid guid = Guid.NewGuid();
-                string path = guid+Category_Image.FileName;
+            {
+                Guid guid = Guid.NewGuid();
+                string path = guid + Category_Image.FileName;
                 Category_Image.SaveAs(Server.MapPath("../AdminContent/CategoryImages/" + path));
                 category.Category_Image = path;
                 db.Categories.Add(category);
@@ -82,7 +81,7 @@ namespace MasterPiece.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int? id,[Bind(Include = "Category_id,Category_Name,Category_Image")] Category category, HttpPostedFileBase Category_Image)
+        public async Task<ActionResult> Edit(int? id, [Bind(Include = "Category_id,Category_Name,Category_Image")] Category category, HttpPostedFileBase Category_Image)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +99,7 @@ namespace MasterPiece.Controllers
 
                     category.Category_Image = existingModel.Category_Image;
                 }
-               
+
                 db.Entry(category).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

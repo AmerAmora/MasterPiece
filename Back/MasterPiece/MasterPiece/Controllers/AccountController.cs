@@ -1,14 +1,11 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using MasterPiece.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MasterPiece.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
@@ -17,13 +14,13 @@ namespace MasterPiece.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        MasterpieceEntities db = new MasterpieceEntities();
+        MasterPieceEntities db = new MasterPieceEntities();
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +32,9 @@ namespace MasterPiece.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -121,7 +118,7 @@ namespace MasterPiece.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -134,6 +131,48 @@ namespace MasterPiece.Controllers
                     return View(model);
             }
         }
+        [AllowAnonymous]
+
+        public ActionResult ShopRegister()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ShopRegister(RegisterViewModel model, string owerName, string storeName, string Phone)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    string userID = db.AspNetUsers.Where(x => x.Email == model.Email).Select(x => x.Id).FirstOrDefault();
+                    Store newStore = new Store();
+                    newStore.Owner_Name = owerName;
+                    newStore.userId = userID;
+                    newStore.Store_Name = storeName;
+                    AspNetUserRole newRole = new AspNetUserRole();
+                    newRole.RoleId = "3";
+                    newRole.UserId = userID;
+                    db.AspNetUserRoles.Add(newRole);
+                    db.Stores.Add(newStore);
+                    db.SaveChanges();
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
 
         //
         // GET: /Account/Register
@@ -142,29 +181,34 @@ namespace MasterPiece.Controllers
         {
             return View();
         }
+     
 
         //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, string firstName,string lastName,string Phone)
+        public async Task<ActionResult> Register(RegisterViewModel model, string firstName, string lastName, string Phone)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    string userID=db.AspNetUsers.Where(x=>x.Email==model.Email).Select(x => x.Id).FirstOrDefault();
+                    string userID = db.AspNetUsers.Where(x => x.Email == model.Email).Select(x => x.Id).FirstOrDefault();
                     AspNetUser newUser = db.AspNetUsers.Find(userID);
                     newUser.PhoneNumber = Phone;
-                    newUser.first_Name= firstName;
-                    newUser.last_Name= lastName;
+                    newUser.first_Name = firstName;
+                    newUser.last_Name = lastName;
+                    AspNetUserRole newRole = new AspNetUserRole();
+                    newRole.RoleId = "2";
+                    newRole.UserId = userID;
+                    db.AspNetUserRoles.Add(newRole);
                     db.SaveChanges();
 
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

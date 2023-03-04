@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="MasterpieceModelStoreContainer" CdmEntityContainer="MasterpieceEntities">
+  <EntityContainerMapping StorageEntityContainer="MasterPieceModelStoreContainer" CdmEntityContainer="MasterPieceEntities">
     <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="MasterpieceModel.C__MigrationHistory">
+      <EntityTypeMapping TypeName="MasterPieceModel.C__MigrationHistory">
         <MappingFragment StoreEntitySet="__MigrationHistory">
           <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
           <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -12,7 +12,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="MasterpieceModel.AspNetRole">
+      <EntityTypeMapping TypeName="MasterPieceModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -20,7 +20,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="MasterpieceModel.AspNetUserClaim">
+      <EntityTypeMapping TypeName="MasterPieceModel.AspNetUserClaim">
         <MappingFragment StoreEntitySet="AspNetUserClaims">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -30,7 +30,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="MasterpieceModel.AspNetUserLogin">
+      <EntityTypeMapping TypeName="MasterPieceModel.AspNetUserLogin">
         <MappingFragment StoreEntitySet="AspNetUserLogins">
           <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
           <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -38,8 +38,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserRoles">
+      <EntityTypeMapping TypeName="MasterPieceModel.AspNetUserRole">
+        <MappingFragment StoreEntitySet="AspNetUserRoles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="MasterpieceModel.AspNetUser">
+      <EntityTypeMapping TypeName="MasterPieceModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -59,7 +68,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="carts">
-      <EntityTypeMapping TypeName="MasterpieceModel.cart">
+      <EntityTypeMapping TypeName="MasterPieceModel.cart">
         <MappingFragment StoreEntitySet="cart">
           <ScalarProperty Name="Cart_Id" ColumnName="Cart_Id" />
           <ScalarProperty Name="Product_id" ColumnName="Product_id" />
@@ -69,7 +78,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="MasterpieceModel.Category">
+      <EntityTypeMapping TypeName="MasterPieceModel.Category">
         <MappingFragment StoreEntitySet="Categories">
           <ScalarProperty Name="Category_id" ColumnName="Category_id" />
           <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
@@ -78,7 +87,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="MasterpieceModel.Comment">
+      <EntityTypeMapping TypeName="MasterPieceModel.Comment">
         <MappingFragment StoreEntitySet="Comments">
           <ScalarProperty Name="Comment_id" ColumnName="Comment_id" />
           <ScalarProperty Name="Comment_text" ColumnName="Comment_text" />
@@ -88,7 +97,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Order_Details">
-      <EntityTypeMapping TypeName="MasterpieceModel.Order_Details">
+      <EntityTypeMapping TypeName="MasterPieceModel.Order_Details">
         <MappingFragment StoreEntitySet="Order_Details">
           <ScalarProperty Name="OrderDetails" ColumnName="OrderDetails" />
           <ScalarProperty Name="Order_id" ColumnName="Order_id" />
@@ -98,7 +107,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="MasterpieceModel.Order">
+      <EntityTypeMapping TypeName="MasterPieceModel.Order">
         <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="Order_id" ColumnName="Order_id" />
           <ScalarProperty Name="userId" ColumnName="userId" />
@@ -106,7 +115,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="MasterpieceModel.Product">
+      <EntityTypeMapping TypeName="MasterPieceModel.Product">
         <MappingFragment StoreEntitySet="Products">
           <ScalarProperty Name="Product_id" ColumnName="Product_id" />
           <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
@@ -120,18 +129,22 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Stores">
-      <EntityTypeMapping TypeName="MasterpieceModel.Store">
+      <EntityTypeMapping TypeName="MasterPieceModel.Store">
         <MappingFragment StoreEntitySet="Stores">
           <ScalarProperty Name="Store_id" ColumnName="Store_id" />
           <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
           <ScalarProperty Name="Store_Image" ColumnName="Store_Image" />
           <ScalarProperty Name="Store_Color" ColumnName="Store_Color" />
           <ScalarProperty Name="Owner_Name" ColumnName="Owner_Name" />
+          <ScalarProperty Name="isAccepted" ColumnName="isAccepted" />
+          <ScalarProperty Name="isBlocked" ColumnName="isBlocked" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="Commercial_Record" ColumnName="Commercial_Record" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Transactions">
-      <EntityTypeMapping TypeName="MasterpieceModel.Transaction">
+      <EntityTypeMapping TypeName="MasterPieceModel.Transaction">
         <MappingFragment StoreEntitySet="Transactions">
           <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -141,13 +154,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="AspNetUserRoles" TypeName="MasterpieceModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-      <EndProperty Name="AspNetRoles">
-        <ScalarProperty Name="Id" ColumnName="RoleId" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="UserId" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

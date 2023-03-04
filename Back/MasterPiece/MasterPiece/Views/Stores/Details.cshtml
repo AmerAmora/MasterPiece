@@ -1,0 +1,51 @@
+﻿@model MasterPiece.Models.Store
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Store</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Store_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Store_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Store_Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Store_Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Store_Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Store_Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Store_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
