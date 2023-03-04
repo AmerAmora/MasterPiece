@@ -1,0 +1,46 @@
+﻿@model MasterPiece.Models.Category
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>Creating a new Category</h2>
+</div>
+
+@using (Html.BeginForm("Create", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 10vh;">
+            <div class="col-12 col-sm-8 col-md-10 col-lg-10 col-xl-8">
+                <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <a href="index.html" class="">
+                            <h3 class="text-primary"><img src="../../AdminContent/img/noCatsLogo.png" width="50px" height="50px"> NoCats</h3>
+                        </a>
+                        <h3>Add Category</h3>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Category_Name" name="Category_Name" placeholder="jhondoe">
+                        <label for="floatingText">Name</label>
+                    </div>
+
+                    <input type="file" class="form-control bg-dark" id="Category_Image" name="Category_Image" accept="image/*">
+                    <BR />
+
+                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4">ADD CATEGORY</button>
+                    <div style="float:right">
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+               
+            </div>
+           
+        </div>
+    </div>
+}
+
+

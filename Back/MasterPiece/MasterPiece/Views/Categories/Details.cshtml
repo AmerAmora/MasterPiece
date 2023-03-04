@@ -1,0 +1,39 @@
+﻿@model MasterPiece.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>@Model.Category_Name</h2>
+    <h4>Category</h4>
+
+</div>
+<div style="text-align:center">
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+               Category Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category_Name)
+            </dd>
+
+            <dt>
+                Image            
+            </dt>
+
+            <dd>
+                <img src="../../AdminContent/CategoryImages/@Model.Category_Image" style="width:400px; height:400px" />
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Category_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </div>
