@@ -19,6 +19,12 @@
         .thumbnail:hover {
             transform: scale(3);
         }
+    th {
+        text-align:center;
+    }
+    td {
+    text-align:center;
+    }
 </style>
 
 <div style="text-align:center">
@@ -42,8 +48,17 @@
                                 <th scope="col">Store Name Color</th>
                                 <th scope="col">Owner</th>
                                 <th scope="col">Image</th>
+                                <th scope="col">
+                                    Commercial Record
+                                </th>
 
+                                <th scope="col">
+                                    Status
+                                </th>
                                 <th scope="col">Actions</th>
+                                <th scope="col">
+                                    Details
+                                </th>
 
                             </tr>
                         </thead>
@@ -65,7 +80,47 @@
                                         @Html.DisplayFor(modelItem => item.Owner_Name)
                                     </td>
                                     <td>
-                                        <img src="../AdminContent/CategoryImages/@item.Store_Image" class="thumbnail" width="50px" height="50px" />
+                                        <img src="../../Images/@item.Store_Image" class="thumbnail" style="width:50px; height:50px; "/>
+                                    </td>
+                                    <td> <a href="~/Commercial_Recordes/@item.Commercial_Record" download style="text-decoration-line:underline">Record </a> </td>
+                                    <td>
+                                        @if (item.isAccepted == true)
+                                        {
+                                            if (item.isBlocked != true)
+                                            {
+                                                <span class="btn btn-success">Accepted</span>
+                                            }
+                                            else
+                                            { <span class="btn btn-danger">Blocked</span>
+                                            }
+                                        }
+                                        else if (item.isAccepted == false)
+                                        {
+                                            <span class="btn btn-danger">Regected</span>
+                                        }
+                                        else
+                                        { <span class="btn" style="color:white; background-color:orange; padding:5px 20px 5px 20px">Pending</span>}
+                                        @*@Html.DisplayFor(modelItem => item.IsAccepted)*@
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @if (item.isAccepted == null)
+                                        {
+                                            <div style=" padding-left:20px">
+                                                @Html.ActionLink("Accept", "Accept", new { id = item.Store_id }, new { @class = "btn btn-success" })
+
+                                                @Html.ActionLink("Reject", "Reject", new { id = item.Store_id }, new { @class = "btn btn-danger" })
+                                            </div>
+                                        }
+                                        else if (item.isAccepted == true && item.isBlocked != true)
+                                        { @Html.ActionLink("Block", "Block", new { id = item.Store_id }, new { @class = "btn btn-danger" })
+                                    }
+                                    else if (item.isAccepted == true && item.isBlocked == true)
+                                    {
+                                         @Html.ActionLink("UnBlock", "UnBlock", new { id = item.Store_id }, new { @class = "btn btn-danger" })
+
+                                    }
+
+
                                     </td>
                                     <td>
 

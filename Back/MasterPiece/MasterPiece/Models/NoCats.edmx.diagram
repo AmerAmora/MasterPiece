@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3dfa6de9dc634a3989f54f2f53e166b4" Name="Diagram1">
+      <Diagram DiagramId="3dfa6de9dc634a3989f54f2f53e166b4" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="MasterPieceModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.AspNetRole" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
@@ -15,10 +15,10 @@
         <EntityTypeShape EntityType="MasterPieceModel.Category" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.Comment" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.Order_Details" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MasterPieceModel.Order" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterPieceModel.Order" Width="1.5" PointX="8.25" PointY="20.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.Product" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MasterPieceModel.Store" Width="1.5" PointX="3" PointY="24.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MasterPieceModel.Transaction" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterPieceModel.Store" Width="1.5" PointX="11.625" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterPieceModel.Transaction" Width="1.5" PointX="11.375" PointY="15" IsExpanded="true" />
         <AssociationConnector Association="MasterPieceModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />

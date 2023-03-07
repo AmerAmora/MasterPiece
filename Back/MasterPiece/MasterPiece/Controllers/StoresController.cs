@@ -1,6 +1,8 @@
 ﻿using MasterPiece.Models;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -68,7 +70,38 @@ namespace MasterPiece.Controllers
             }
             return View(store);
         }
+        public ActionResult Accept(int id)
+        {
+            var student = db.Stores.Find(id);
+            student.isAccepted = true;
+            db.SaveChanges();
 
+            return View("Index", db.Stores.ToList());
+        }
+        public ActionResult Block(int id)
+        {
+            var student = db.Stores.Find(id);
+            student.isBlocked = true;
+            db.SaveChanges();
+
+            return View("Index", db.Stores.ToList());
+        }
+        public ActionResult UnBlock(int id)
+        {
+            var student = db.Stores.Find(id);
+            student.isBlocked = false;
+            db.SaveChanges();
+
+            return View("Index", db.Stores.ToList());
+        }
+        public ActionResult Reject(int id)
+        {
+            var student = db.Stores.Find(id);
+            student.isAccepted = false;
+            db.SaveChanges();
+    
+            return View("Index", db.Stores.ToList());
+        }
         // POST: Stores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

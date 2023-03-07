@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -68,6 +69,7 @@ namespace MasterPiece.Controllers
         {
             if (!ModelState.IsValid)
             {
+                
                 return View(model);
             }
 
@@ -77,7 +79,40 @@ namespace MasterPiece.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    string userID = db.AspNetUsers.Where(x => x.Email == model.Email).Select(x => x.Id).FirstOrDefault();
+                    Store loggedstore = db.Stores.Where(x => x.userId == userID).Select(store => store).FirstOrDefault();
+                    if (loggedstore.isAccepted == true ) 
+                    {
+                        if (loggedstore.isBlocked != true)
+                        {
+                            return RedirectToLocal(returnUrl);
+                        }
+                        else {
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            TempData["swal_message"] = $"Your account has been blocked please contact the staff ";
+                            ViewBag.title = "Error";
+                            ViewBag.icon = "error";
+                            return View(model);
+                        }
+
+                    }
+                    else if (loggedstore.isAccepted == false)
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        TempData["swal_message"] = $"Your Request has been declined";
+                        ViewBag.title = "Error";
+                        ViewBag.icon = "error";
+                        return View(model); 
+                    }
+                    else 
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        TempData["swal_message"] = $"Our team is reviewing your request please wait";
+                        ViewBag.title = "warning";
+                        ViewBag.icon = "warning";
+                        return View(model);
+                    }
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -140,7 +175,7 @@ namespace MasterPiece.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ShopRegister(RegisterViewModel model, string owerName, string storeName, string Phone)
+        public async Task<ActionResult> ShopRegister(RegisterViewModel model, string owerName, string storeName, string Phone, HttpPostedFileBase Store_Image, HttpPostedFileBase Commercial_Record)
         {
             if (ModelState.IsValid)
             {
@@ -153,6 +188,15 @@ namespace MasterPiece.Controllers
                     newStore.Owner_Name = owerName;
                     newStore.userId = userID;
                     newStore.Store_Name = storeName;
+                    newStore.isBlocked = false;
+                    Guid guid = Guid.NewGuid();
+                    string path = guid + Store_Image.FileName;
+                    Store_Image.SaveAs(Server.MapPath("../Images/" + path));
+                    newStore.Store_Image = path;
+                    Guid guid2 = Guid.NewGuid();
+                    string CommercialPath = guid2 + Commercial_Record.FileName;
+                    Commercial_Record.SaveAs(Server.MapPath("../Commercial_Recordes/" + CommercialPath));
+                    newStore.Commercial_Record = CommercialPath;
                     AspNetUserRole newRole = new AspNetUserRole();
                     newRole.RoleId = "3";
                     newRole.UserId = userID;
@@ -193,7 +237,7 @@ namespace MasterPiece.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await UserManager.CreateAsync(user, model.Password);   
                 if (result.Succeeded)
                 {
                     string userID = db.AspNetUsers.Where(x => x.Email == model.Email).Select(x => x.Id).FirstOrDefault();

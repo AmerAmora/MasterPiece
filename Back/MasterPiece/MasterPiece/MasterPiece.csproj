@@ -395,6 +395,10 @@
       <DependentUpon>NoCats.edmx</DependentUpon>
       <LastGenOutput>NoCats.cs</LastGenOutput>
     </Content>
+    <Content Include="RegisterStoreContent\css\main.css" />
+    <Content Include="RegisterStoreContent\js\global.js" />
+    <Content Include="RegisterStoreContent\vendor\jquery\jquery.js" />
+    <Content Include="RegisterStoreContent\vendor\jquery\jquery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\bootstrap\css\bootstrap-grid.css.map" />
@@ -703,6 +707,8 @@
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Commercial_Recordes\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
