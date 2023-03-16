@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<MasterPiece.Models.Product>
+@{
     Layout = "~/Views/Shared/MainLayout.cshtml";
 
 }
@@ -77,38 +78,25 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a href="single-product.html"><img src="../assets/img/products/HyperXMouse.png" alt=""></a>
-                    </div>
-                    <h3>
-                        Hyper X Mouse
-                    </h3>
-                    <p class="product-price">85$ </p>
-                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+            @{
+                foreach(var item in Model) 
+                {
+                <div class="col-lg-4 col-md-6 text-center">
+                                <div class="single-product-item">
+                                    <div class="product-image">
+                                        <a href="single-product.html"><img src="../ProductImage/@item.Product_Image" alt=""></a>
+                                    </div>
+                                    <h3>
+                                        @item.Product_Name
+                                    </h3>
+                                    <p class="product-price" style="font-size:14px">@item.Store.Store_Name</p>
+
+                                    <p class="product-price">@item.Product_Price $ </p>
+                                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a href="single-product.html"><img src="../assets/img/products/HeadSet.png" alt=""></a>
-                    </div>
-                    <h3>Hyper X HeadSet</h3>
-                    <p class="product-price"> 70$ </p>
-                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a href="single-product.html"><img src="../assets/img/products/HyperXMouse.png" alt=""></a>
-                    </div>
-                    <h3>Hyper X Mouse</h3>
-                    <p class="product-price">35$ </p>
-                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                </div>
-            </div>
+                }
+            }
         </div>
     </div>
 </div>

@@ -175,6 +175,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OwnerDashboardController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Global.asax.cs">
@@ -703,12 +704,16 @@
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\Account\ShopRegister.cshtml" />
+    <Content Include="Views\Shared\_OwnerDashboard.cshtml" />
+    <Content Include="Views\OwnerDashboard\Index.cshtml" />
+    <Content Include="Views\OwnerDashboard\CreateProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />
     <Folder Include="App_Data\" />
     <Folder Include="Commercial_Recordes\" />
     <Folder Include="Images\" />
+    <Folder Include="ProductImage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

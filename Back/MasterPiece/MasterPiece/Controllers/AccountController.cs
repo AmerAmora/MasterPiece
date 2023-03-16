@@ -80,12 +80,21 @@ namespace MasterPiece.Controllers
             {
                 case SignInStatus.Success:
                     string userID = db.AspNetUsers.Where(x => x.Email == model.Email).Select(x => x.Id).FirstOrDefault();
+                    string rolecheck=db.AspNetUserRoles.Where(x=>x.UserId== userID).Select(x=>x.RoleId).FirstOrDefault();
+                    if (rolecheck == "2") 
+                    {
+                        return RedirectToLocal(returnUrl);
+
+                    }
+                    else if (rolecheck == "1") { return RedirectToAction("Index", "Products", ""); }
+
                     Store loggedstore = db.Stores.Where(x => x.userId == userID).Select(store => store).FirstOrDefault();
                     if (loggedstore.isAccepted == true ) 
                     {
                         if (loggedstore.isBlocked != true)
                         {
-                            return RedirectToLocal(returnUrl);
+                            Session["LoggedStoreId"] = loggedstore.Store_id;   
+                            return RedirectToAction("Index", "OwnerDashboard",new { id = loggedstore.Store_id });
                         }
                         else {
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

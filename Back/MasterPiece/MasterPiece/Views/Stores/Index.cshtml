@@ -25,7 +25,9 @@
     td {
     text-align:center;
     }
+
 </style>
+
 
 <div style="text-align:center">
     <h2>Stores</h2>
@@ -88,18 +90,18 @@
                                         {
                                             if (item.isBlocked != true)
                                             {
-                                                <span class="btn btn-success">Accepted</span>
+                                                <span class="badge btn-success">Accepted</span>
                                             }
                                             else
-                                            { <span class="btn btn-danger">Blocked</span>
+                                            { <span class="badge btn-danger">Blocked</span>
                                             }
                                         }
                                         else if (item.isAccepted == false)
                                         {
-                                            <span class="btn btn-danger">Regected</span>
+                                            <span class="badge btn-danger">Regected</span>
                                         }
                                         else
-                                        { <span class="btn" style="color:white; background-color:orange; padding:5px 20px 5px 20px">Pending</span>}
+                                        { <span class="badge btn-warning">Pending</span>}
                                         @*@Html.DisplayFor(modelItem => item.IsAccepted)*@
                                     </td>
                                     <td style="text-align:center;">

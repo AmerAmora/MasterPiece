@@ -1,12 +1,18 @@
-﻿using System.Web.Mvc;
+﻿using MasterPiece.Models;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
     public class HomeController : Controller
     {
+        private MasterPieceEntities db = new MasterPieceEntities();
+
         public ActionResult Index()
         {
-            return View();
+            var products = db.Products.ToList();
+
+            return View(products);
         }
 
         public ActionResult About()
