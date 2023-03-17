@@ -51,9 +51,11 @@
                         <nav class="main-menu">
                             <ul>
                                 <li class="current-list-item">
-                                    <a href="index.html">Home</a>
+                                    @Html.ActionLink("Home","Index","Home")
                                 </li>
-                                <li><a href="about.html">About</a></li>
+                                <li>
+                                    @Html.ActionLink("About", "About", "Home")
+                                </li>
                                 <li>
                                     <a href="#">Pages</a>
                                     <ul class="sub-menu">
@@ -67,7 +69,9 @@
                                     </ul>
                                 </li>
 
-                                <li><a href="contact.html">Contact</a></li>
+                                <li>
+                                    @Html.ActionLink("Contact", "Contact", "Home")
+                                </li>
                                 <li>
                                     <a href="shop.html">Shop</a>
                                     <ul class="sub-menu">

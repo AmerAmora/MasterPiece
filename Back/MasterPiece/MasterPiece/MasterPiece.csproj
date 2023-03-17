@@ -310,14 +310,19 @@
     <Content Include="assets\img\avaters\avatar2.png" />
     <Content Include="assets\img\avaters\avatar3.png" />
     <Content Include="assets\img\breadcrumb-bg.jpg" />
+    <Content Include="assets\img\CategoriesBG.png" />
     <Content Include="assets\img\company-logos\1.png" />
     <Content Include="assets\img\company-logos\2.png" />
     <Content Include="assets\img\company-logos\3.png" />
     <Content Include="assets\img\company-logos\4.png" />
     <Content Include="assets\img\company-logos\5.png" />
+    <Content Include="assets\img\Contactus.jpg" />
+    <Content Include="assets\img\ContactUsBG.jpg" />
     <Content Include="assets\img\dd.jpg" />
+    <Content Include="assets\img\EvenBetter.png" />
     <Content Include="assets\img\favicon.png" />
     <Content Include="assets\img\feature-bg.jpg" />
+    <Content Include="assets\img\CartBG.png" />
     <Content Include="assets\img\hero-bg-2.jpg" />
     <Content Include="assets\img\hero-bg-3.jpg" />
     <Content Include="assets\img\hero-bg.jpg" />
@@ -707,6 +712,10 @@
     <Content Include="Views\Shared\_OwnerDashboard.cshtml" />
     <Content Include="Views\OwnerDashboard\Index.cshtml" />
     <Content Include="Views\OwnerDashboard\CreateProduct.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
+    <Content Include="Views\Home\Categories.cshtml" />
+    <Content Include="Views\Home\SingleCategory.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />
