@@ -43,11 +43,9 @@ namespace MasterPiece.Controllers
         }
         public ActionResult Cart() 
         {
-
             HttpCookie cart = Request.Cookies["cart"];
             List<Product> allProducts = new List<Product>();
-
-            if (cart != null&& cart.Value !="")
+            if (cart != null)
             {
                 // read the cart items from the cookie
                 List<string> items = new List<string>(cart.Value.Split('|'));
@@ -59,8 +57,6 @@ namespace MasterPiece.Controllers
                     allProducts.AddRange(itemProducts);
                 }
                 UserProducts = allProducts;
-
-
                 // render the shopping cart view with the cart items
                 return View(UserProducts);
             }
@@ -72,12 +68,13 @@ namespace MasterPiece.Controllers
             }
 
         }
-        public ActionResult AddItem(int id)
+        public ActionResult AddItem(int id, string returnUrl)
         {
             // add the selected item to the shopping cart
             // ...
 
             // create a new cart cookie
+            HttpCookie cart = new HttpCookie("cart");
 
 
             // read the existing cart items from the cookie
@@ -86,7 +83,6 @@ namespace MasterPiece.Controllers
             {
                 items = new List<string>(Request.Cookies["cart"].Value.Split('|'));
             }
-            HttpCookie cart = new HttpCookie("cart");
 
             // add the new item to the cart
             items.Add(id.ToString());
@@ -97,7 +93,7 @@ namespace MasterPiece.Controllers
             Response.Cookies.Add(cart);
 
             // redirect back to the shopping cart view
-            return RedirectToAction("Cart");
+            return Redirect(returnUrl);
         }
         public ActionResult RemoveItem(int id)
         {
@@ -117,10 +113,19 @@ namespace MasterPiece.Controllers
             // remove the item from the cart
             items.Remove(id.ToString());
 
-            // update the cart cookie with the new items
-            cart.Value = string.Join("|", items);
-            cart.Expires = DateTime.Now.AddDays(7);
-            Response.Cookies.Add(cart);
+            // update the cart cookie with the new items or delete it if no items left
+            if (items.Count > 0)
+            {
+                cart.Value = string.Join("|", items);
+                cart.Expires = DateTime.Now.AddDays(7);
+                Response.Cookies.Add(cart);
+            }
+            else
+            {
+                cart.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cart);
+            }
+
 
             // redirect back to the shopping cart view
             return RedirectToAction("Cart");

@@ -38,9 +38,7 @@
                         <tbody>
                             @{double totalprice = 0; }
 
-                            @if (Model.Count()==0)
-                            {
-                                foreach (var item in Model)
+                                @foreach (var item in Model)
                                 {
 
 
@@ -53,7 +51,7 @@
                                         <td class="product-total">1</td>
                                     </tr>
                                     totalprice = totalprice + Convert.ToDouble(item.Product_Price);
-                                }}
+                                }
                         </tbody>
                     </table>
                 </div>
@@ -69,14 +67,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model.Count()==0)
-                            {
-                                double finalprice = totalprice;
+                           
+                                @{double finalprice = totalprice; }
                                 <tr class="total-data">
                                     <td><strong>Subtotal: </strong></td>
                                     <td>@totalprice $</td>
                                 </tr>
-                                    if (totalprice >= 100)
+                                    @if (totalprice >= 100)
                                     {
 
 
@@ -98,7 +95,7 @@
                                     <td><strong>Total: </strong></td>
                                     <td>@finalprice $</td>
                                 </tr>
-                                }
+                                
                             </tbody>
                     </table>
                     <div class="cart-buttons">

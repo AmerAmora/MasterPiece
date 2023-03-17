@@ -39,7 +39,7 @@
 
                         <p class="product-price">@item.Product_Price $</p>
 
-                        <a href="../AddItem/@item.Product_id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <a href="@Url.Action("AddItem","Home", new { Id =item.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
                 </div>
             }
