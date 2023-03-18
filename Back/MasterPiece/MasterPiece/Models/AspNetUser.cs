@@ -20,7 +20,6 @@ namespace MasterPiece.Models
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetUserRoles = new HashSet<AspNetUserRole>();
-            this.carts = new HashSet<cart>();
             this.Comments = new HashSet<Comment>();
             this.Orders = new HashSet<Order>();
             this.Stores = new HashSet<Store>();
@@ -41,6 +40,9 @@ namespace MasterPiece.Models
         public string UserName { get; set; }
         public string first_Name { get; set; }
         public string last_Name { get; set; }
+        public string StreetAddress { get; set; }
+        public string city { get; set; }
+        public string ZipCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -48,8 +50,6 @@ namespace MasterPiece.Models
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cart> carts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

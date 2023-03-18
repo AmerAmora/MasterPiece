@@ -1,8 +1,10 @@
 ﻿using MasterPiece.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -31,6 +33,75 @@ namespace MasterPiece.Controllers
 
             return View(products);
         }
+        [Authorize(Roles = "User")]
+
+        public ActionResult CheckOut()
+        {
+            string userid = User.Identity.GetUserId();
+            HttpCookie cart = Request.Cookies["cart"];
+            List<Product> allProducts = new List<Product>();
+            if (cart != null)
+            {
+                // read the cart items from the cookie
+                List<string> items = new List<string>(cart.Value.Split('|'));
+                double totalprice = 0;
+                foreach (var product in items)
+                {
+                    int id = Convert.ToInt32(product);
+                    Product itemProducts = db.Products.Where(x => x.Product_id == id).FirstOrDefault();
+                    totalprice = totalprice + Convert.ToDouble(itemProducts.Product_Price);
+                    
+                }
+                if (totalprice < 100) totalprice = totalprice + 15;
+                ViewBag.TotalPrice = totalprice;    
+           
+                // render the shopping cart view with the cart items
+            }
+         return View();
+
+        }
+        public ActionResult CheckOutItems() 
+        {
+            Guid guid = Guid.NewGuid();
+            HttpCookie cart = Request.Cookies["cart"];
+
+            List<string> items = new List<string>(cart.Value.Split('|'));
+            int productid = Convert.ToInt32(items[0]);
+            int storeid =Convert.ToInt32( db.Products.Where(x => x.Product_id == productid).FirstOrDefault().Store_id);
+            Order neworder = new Order();
+            neworder.Order_id = guid.ToString();
+            neworder.userId = User.Identity.GetUserId();
+            neworder.Order_Date = DateTime.Now;
+            neworder.Store_Id = storeid;
+            db.Orders.Add(neworder);
+            double totalprice = 0;
+            foreach (var product in items)
+            {
+                int id = Convert.ToInt32(product);
+                Product itemProducts = db.Products.Where(x => x.Product_id == id).FirstOrDefault();
+                totalprice = totalprice + Convert.ToDouble(itemProducts.Product_Price);
+                Order_Details newOrderDetail = new Order_Details();
+                newOrderDetail.Product_id = id;
+                newOrderDetail.Order_id = guid.ToString();
+                db.Order_Details.Add(newOrderDetail);
+                db.SaveChanges();
+            }
+            neworder.Amount = totalprice;
+            Transaction newTransaction = new Transaction();
+            newTransaction.Amount = totalprice;
+            newTransaction.Order_id = guid.ToString();
+            newTransaction.userId = User.Identity.GetUserId();
+            newTransaction.TransactionDate = DateTime.Now;
+            cart.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cart);
+            
+            db.Transactions.Add(newTransaction);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Cart","Home","");
+        }
+
         public ActionResult Categories()
         {
             var categories = db.Categories.ToList();    
@@ -83,7 +154,19 @@ namespace MasterPiece.Controllers
             {
                 items = new List<string>(Request.Cookies["cart"].Value.Split('|'));
             }
-
+            if (items.Count > 0) 
+            { 
+                int productid =Convert.ToInt32(items[0]);
+                int productCheck =Convert.ToInt32(db.Products.Where(x => x.Product_id == productid).FirstOrDefault().Store_id);
+                int newproductstore = Convert.ToInt32(db.Products.Where(x => x.Product_id == id).FirstOrDefault().Store_id);
+                if (newproductstore != productCheck)
+                {
+                    TempData["swal_message"] = $"You can NOT choose items from more than one store";
+                    ViewBag.title = "Error";
+                    ViewBag.icon = "error";
+                    return Redirect(returnUrl);
+                }
+            }
             // add the new item to the cart
             items.Add(id.ToString());
 

@@ -12,14 +12,12 @@ namespace MasterPiece.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class cart
+    public partial class sysdiagram
     {
-        public int Cart_Id { get; set; }
-        public Nullable<int> Product_id { get; set; }
-        public string userId { get; set; }
-        public Nullable<int> Quantity { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Product Product { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

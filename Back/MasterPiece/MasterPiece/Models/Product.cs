@@ -17,7 +17,6 @@ namespace MasterPiece.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.carts = new HashSet<cart>();
             this.Comments = new HashSet<Comment>();
             this.Order_Details = new HashSet<Order_Details>();
         }
@@ -31,8 +30,6 @@ namespace MasterPiece.Models
         public Nullable<int> Store_id { get; set; }
         public Nullable<int> Category_id { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cart> carts { get; set; }
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

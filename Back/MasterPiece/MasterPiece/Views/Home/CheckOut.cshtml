@@ -1,0 +1,310 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = null;
+}
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+
+        body {
+            background-color: #eee;
+        }
+        .container {
+            height: 100vh;
+        }
+
+
+        .card {
+            border: none;
+        }
+
+        .form-control {
+            border-bottom: 2px solid #eee !important;
+            border: none;
+            font-weight: 600
+        }
+
+            .form-control:focus {
+                color: #495057;
+                background-color: #fff;
+                border-color: #8bbafe;
+                outline: 0;
+                box-shadow: none;
+                border-radius: 0px;
+                border-bottom: 2px solid blue !important;
+            }
+
+
+
+        .inputbox {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%
+        }
+
+            .inputbox span {
+                position: absolute;
+                top: 7px;
+                left: 11px;
+                transition: 0.5s
+            }
+
+            .inputbox i {
+                position: absolute;
+                top: 13px;
+                right: 8px;
+                transition: 0.5s;
+                color: #3F51B5
+            }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0
+        }
+
+        .inputbox input:focus ~ span {
+            transform: translateX(-0px) translateY(-15px);
+            font-size: 12px
+        }
+
+        .inputbox input:valid ~ span {
+            transform: translateX(-0px) translateY(-15px);
+            font-size: 12px
+        }
+
+        .card-blue {
+            background-color: #861523;
+        }
+
+        .hightlight {
+            background-color: #5737d9;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .yellow {
+            color: white;
+        }
+
+        .decoration {
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #861523;
+            border-color: #861523;
+        }
+
+            .btn-success:hover {
+                color: #fff;
+                background-color: #861523;
+                border-color: #861523;
+            }
+
+
+        .decoration:hover {
+            text-decoration: none;
+            color: #fdcc49;
+        }
+        .select-dropdown,
+        .select-dropdown * {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .select-dropdown {
+            position: relative;
+            background-color: white;
+            border-bottom: 2px solid #eee !important;
+            border-radius: 4px;
+        }
+
+            .select-dropdown select {
+                font-size: 1rem;
+                font-weight: normal;
+                max-width: 100%;
+                padding: 8px 24px 8px 10px;
+                border: none;
+                background-color: transparent;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+
+                .select-dropdown select:active, .select-dropdown select:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+
+            .select-dropdown:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 8px;
+                width: 0;
+                height: 0;
+                margin-top: -2px;
+                border-top: 5px solid #aaa;
+                border-right: 5px solid transparent;
+                border-left: 5px solid transparent;
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 px-5">
+
+        <div class="mb-4">
+
+            <h2>Confirm order and pay</h2>
+            <span>please make the payment, after that you can enjoy all the features and benefits.</span>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-8">
+
+
+                <div class="card p-3">
+
+                    <h6 class="text-uppercase">Payment details</h6>
+                    <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="inputbox mt-3 mr-2">
+                                <input type="text" name="name" class="form-control" required="required"> <i class="fa fa-credit-card"></i> <span>Card Number</span>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="d-flex flex-row">
+
+
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Expiry</span> </div>
+
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>CVV</span> </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="mt-4 mb-4">
+
+                        <h6 class="text-uppercase">Billing Address</h6>
+
+
+                        <div class="row mt-3">
+
+                            <div class="col-md-6">
+
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Street Address</span> </div>
+
+
+                            </div>
+
+
+                            <div class="col-md-6" style="margin-top:12px;">
+
+                                <div class="select-dropdown">
+                                    <select>
+                                        <option value="Option 1">City</option>
+                                        <option value="Irbid">Irbid</option>
+                                        <option value="Amman">Amman</option>
+                                        <option value="Zarqa">Zarqa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-2">
+
+                            <div class="col-md-6">
+
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>State/Province</span> </div>
+
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>
+
+
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-4 mb-4 d-flex justify-content-between">
+
+
+                    <a style="color:darkred; " href="@Url.Action("Cart","Home","")">Back To Cart</a>
+
+
+                    <a href="@Url.Action("CheckOutItems","Home","")" class="btn btn-success px-3" style="background-color:green; border:0px;">Pay $ @ViewBag.TotalPrice</a>
+
+
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card card-blue p-3 text-white mb-3">
+
+                    <span>You have to pay</span>
+                    <div class="d-flex flex-row align-items-end mb-3">
+                        <h1 class="mb-0 yellow">$@ViewBag.TotalPrice</h1>
+                    </div>
+
+                    <span>Enjoy all the features and perk after you complete the payment</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+</html>

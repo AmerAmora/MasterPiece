@@ -63,15 +63,9 @@
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="first_Name" Type="varchar" MaxLength="50" />
     <Property Name="last_Name" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="cart">
-    <Key>
-      <PropertyRef Name="Cart_Id" />
-    </Key>
-    <Property Name="Cart_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Product_id" Type="int" />
-    <Property Name="userId" Type="nvarchar" MaxLength="128" />
-    <Property Name="Quantity" Type="int" />
+    <Property Name="StreetAddress" Type="varchar(max)" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -105,6 +99,9 @@
     </Key>
     <Property Name="Order_id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="userId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Store_Id" Type="int" />
+    <Property Name="Order_Date" Type="datetime" />
+    <Property Name="Amount" Type="float" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
@@ -133,6 +130,16 @@
     <Property Name="userId" Type="nvarchar" MaxLength="128" />
     <Property Name="Commercial_Record" Type="varchar(max)" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="Transactions">
     <Key>
       <PropertyRef Name="TransactionId" />
@@ -143,30 +150,6 @@
     <Property Name="Order_id" Type="nvarchar" MaxLength="128" />
     <Property Name="userId" Type="nvarchar" MaxLength="128" />
   </EntityType>
-  <Association Name="FK__cart__Product_id__6383C8BA">
-    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
-    <End Role="cart" Type="Self.cart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="Product_id" />
-      </Principal>
-      <Dependent Role="cart">
-        <PropertyRef Name="Product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__cart__userId__6477ECF3">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="cart" Type="Self.cart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="cart">
-        <PropertyRef Name="userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Comments__Produc__59FA5E80">
     <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
@@ -212,6 +195,18 @@
       </Principal>
       <Dependent Role="Order_Details">
         <PropertyRef Name="Product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Store_Id__01142BA1">
+    <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stores">
+        <PropertyRef Name="Store_id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Store_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -350,22 +345,14 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__cart__Product_id__6383C8BA" Association="Self.FK__cart__Product_id__6383C8BA">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="cart" EntitySet="cart" />
-    </AssociationSet>
-    <AssociationSet Name="FK__cart__userId__6477ECF3" Association="Self.FK__cart__userId__6477ECF3">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="cart" EntitySet="cart" />
-    </AssociationSet>
     <AssociationSet Name="FK__Comments__Produc__59FA5E80" Association="Self.FK__Comments__Produc__59FA5E80">
       <End Role="Products" EntitySet="Products" />
       <End Role="Comments" EntitySet="Comments" />
@@ -381,6 +368,10 @@
     <AssociationSet Name="FK__Order_Det__Produ__60A75C0F" Association="Self.FK__Order_Det__Produ__60A75C0F">
       <End Role="Products" EntitySet="Products" />
       <End Role="Order_Details" EntitySet="Order_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Store_Id__01142BA1" Association="Self.FK__Orders__Store_Id__01142BA1">
+      <End Role="Stores" EntitySet="Stores" />
+      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK__Orders__userId__5CD6CB2B" Association="Self.FK__Orders__userId__5CD6CB2B">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

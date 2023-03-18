@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="MasterPieceModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.AspNetUserRole" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.AspNetUser" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MasterPieceModel.cart" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.Category" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.Comment" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.Order_Details" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
@@ -23,18 +22,18 @@
         <AssociationConnector Association="MasterPieceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="MasterPieceModel.FK__cart__userId__6477ECF3" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Comments__userId__59063A47" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Orders__userId__5CD6CB2B" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Stores__userId__693CA210" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Transacti__userI__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="MasterPieceModel.FK__cart__Product_id__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Products__Catego__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Comments__Produc__59FA5E80" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Order_Det__Order__5FB337D6" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Order_Det__Produ__60A75C0F" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Transacti__Order__6754599E" ManuallyRouted="false" />
         <AssociationConnector Association="MasterPieceModel.FK__Products__Store___5535A963" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MasterPieceModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="MasterPieceModel.FK__Orders__Store_Id__01142BA1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

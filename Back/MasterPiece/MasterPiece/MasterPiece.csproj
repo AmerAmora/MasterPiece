@@ -197,9 +197,6 @@
     <Compile Include="Models\AspNetUserRole.cs">
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\cart.cs">
-      <DependentUpon>NoCats.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
@@ -236,6 +233,9 @@
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Store.cs">
+      <DependentUpon>NoCats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transaction.cs">
@@ -311,6 +311,7 @@
     <Content Include="assets\img\avaters\avatar3.png" />
     <Content Include="assets\img\breadcrumb-bg.jpg" />
     <Content Include="assets\img\CategoriesBG.png" />
+    <Content Include="assets\img\CheckOutBG.jpg" />
     <Content Include="assets\img\company-logos\1.png" />
     <Content Include="assets\img\company-logos\2.png" />
     <Content Include="assets\img\company-logos\3.png" />
@@ -716,6 +717,7 @@
     <Content Include="Views\Home\Categories.cshtml" />
     <Content Include="Views\Home\SingleCategory.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\CheckOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />

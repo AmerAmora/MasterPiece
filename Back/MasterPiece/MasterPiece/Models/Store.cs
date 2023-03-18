@@ -18,6 +18,7 @@ namespace MasterPiece.Models
         public Store()
         {
             this.Products = new HashSet<Product>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int Store_id { get; set; }
@@ -33,5 +34,7 @@ namespace MasterPiece.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

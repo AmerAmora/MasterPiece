@@ -23,11 +23,15 @@ namespace MasterPiece.Models
     
         public string Order_id { get; set; }
         public string userId { get; set; }
+        public Nullable<int> Store_Id { get; set; }
+        public Nullable<System.DateTime> Order_Date { get; set; }
+        public Nullable<double> Amount { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual Store Store { get; set; }
     }
 }

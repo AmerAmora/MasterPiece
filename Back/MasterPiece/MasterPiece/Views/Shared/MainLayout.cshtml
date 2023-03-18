@@ -56,18 +56,6 @@
                                 <li>
                                     @Html.ActionLink("About", "About", "Home")
                                 </li>
-                                <li>
-                                    <a href="#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="404.html">404 page</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Check Out</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="news.html">News</a></li>
-                                        <li><a href="shop.html">Shop</a></li>
-                                    </ul>
-                                </li>
 
                                 <li>
                                     @Html.ActionLink("Contact", "Contact", "Home")
@@ -79,14 +67,10 @@
                                     @Html.ActionLink("Categories", "Categories", "Home")
                                 </li>
                                 <li>
-                                    <a href="shop.html">Shop</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop.html">Shop</a></li>
-                                        <li><a href="checkout.html">Check Out</a></li>
-                                        <li><a href="single-product.html">Single Product</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                    </ul>
+                                    @Html.ActionLink("Become A Partner", "ShopRegister", "Account")
+
                                 </li>
+
                                 <li>
                                     @Html.Partial("_LoginPartial")
                                 </li>

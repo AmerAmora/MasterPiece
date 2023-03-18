@@ -29,8 +29,8 @@
                     <ul>
                         <li class="active" data-filter="*">All</li>
                         <li data-filter=".Mice">Mice</li>
-                        <li data-filter=".HeadSet">Headsets</li>
-                        <li data-filter=".Keyboads">Keyboads</li>
+                        <li data-filter=".Headsets">Headsets</li>
+                        <li data-filter=".Keyboards">Keyboards</li>
                         <li><a href="Categories.html" style="color:black"> More</a></li>
 
                     </ul>
@@ -57,7 +57,7 @@
 
                         <a href="@Url.Action("AddItem", new { Id =item.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
-            </div>
+                </div>
             }
         </div>
 
@@ -77,3 +77,14 @@
     </div>
 </div>
 <!-- end products -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (TempData["swal_message"] != null)
+{
+    <script>
+    swal({
+      title: "@ViewBag.title",
+      text: "@TempData["swal_message"]",
+      icon: "@ViewBag.icon"
+    });
+    </script>
+}

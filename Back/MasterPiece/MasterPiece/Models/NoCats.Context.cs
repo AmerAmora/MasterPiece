@@ -31,7 +31,6 @@ namespace MasterPiece.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<cart> carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Order_Details> Order_Details { get; set; }
@@ -39,5 +38,6 @@ namespace MasterPiece.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
