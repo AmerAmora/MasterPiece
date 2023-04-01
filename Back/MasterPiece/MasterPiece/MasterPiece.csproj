@@ -718,6 +718,7 @@
     <Content Include="Views\Home\SingleCategory.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\CheckOut.cshtml" />
+    <Content Include="Views\Home\SingleProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />

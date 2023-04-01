@@ -43,7 +43,7 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="@Url.Action("Index","Home")" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img src="../../AdminContent/img/noCatsLogo.png" width="50px" height="50px"> NoCats</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -58,11 +58,11 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="../Stores/Index" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Stores</a>
+                    <a href="@Url.Action("Index","Stores","")" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Stores</a>
 
-                    <a href="../Products/Index" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Products</a>
-                    <a href="../Categories/Index" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Categories</a>
-                    <a href="../AspNetUsers/Index" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Users</a>
+                    <a href="@Url.Action("Index","Products","")" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Products</a>
+                    <a href="@Url.Action("Index","Categories","")" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Categories</a>
+                    <a href="@Url.Action("Index","AspNetUsers","")" class="nav-item nav-link "><i class="fa fa-table me-2"></i>Users</a>
 
 
                 </div>

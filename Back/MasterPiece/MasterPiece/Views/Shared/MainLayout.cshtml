@@ -41,7 +41,7 @@
                     <div class="main-menu-wrap">
                         <!-- logo -->
                         <div class="site-logo">
-                            <a href="index.html">
+                            <a href="@Url.Action("Index","Home")">
                                 <img src="~/assets/img/noCatsLogo.png" id="Logo" alt="">
 
                             </a>
@@ -66,11 +66,12 @@
                                 <li>
                                     @Html.ActionLink("Categories", "Categories", "Home")
                                 </li>
-                                <li>
-                                    @Html.ActionLink("Become A Partner", "ShopRegister", "Account")
+                                @if (!Request.IsAuthenticated) { 
+                                    <li>
+                                        @Html.ActionLink("Become A Partner", "ShopRegister", "Account")
 
-                                </li>
-
+                                    </li>
+                                }
                                 <li>
                                     @Html.Partial("_LoginPartial")
                                 </li>

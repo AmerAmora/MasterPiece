@@ -30,14 +30,14 @@
                 <div class="col-lg-4 col-md-6 text-center @item.Category.Category_Name">
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a href="single-product.html"><img src="../../ProductImage/@item.Product_Image" alt=""></a>
+                            <a href="@Url.Action("SingleProduct", "Home", new { id=item.Product_id})"><img src="../../ProductImage/@item.Product_Image" alt=""></a>
                         </div>
                         <h3>
                             @item.Product_Name
                         </h3>
                         <p class="product-price" style="font-size:14px">@item.Store.Store_Name</p>
 
-                        <p class="product-price">@item.Product_Price $</p>
+                        <p class="product-price">@item.Product_Price JD</p>
 
                         <a href="@Url.Action("AddItem","Home", new { Id =item.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
@@ -60,4 +60,14 @@
         </div>
     </div>
 </div>
-<!-- end products -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (TempData["swal_message"] != null)
+{
+    <script>
+    swal({
+      title: "@ViewBag.title",
+      text: "@TempData["swal_message"]",
+      icon: "@ViewBag.icon"
+    });
+    </script>
+}

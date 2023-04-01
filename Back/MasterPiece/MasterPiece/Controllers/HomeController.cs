@@ -29,7 +29,7 @@ namespace MasterPiece.Controllers
         }
         public ActionResult Products()
         {
-            var products = db.Products.ToList();
+            var products = db.Products.Where(x=>x.Store.isBlocked!=true).ToList();
 
             return View(products);
         }
@@ -111,6 +111,12 @@ namespace MasterPiece.Controllers
         {
             var Products = db.Products.Where(x=>x.Category_id==id).ToList();
             return View(Products);
+        }
+        public ActionResult SingleProduct(int? id)
+        {
+            var Product = db.Products.Where(x => x.Product_id == id).FirstOrDefault();
+
+            return View(Product);
         }
         public ActionResult Cart() 
         {

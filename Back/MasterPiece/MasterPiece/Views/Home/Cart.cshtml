@@ -45,7 +45,7 @@
                                         <td class="product-remove"><a href="RemoveItem/@item.Product_id"><i class="far fa-window-close"></i></a></td>
                                         <td class="product-image"><img src="../../ProductImage/@item.Product_Image" style="height: 60px; width: 60px;" alt=""></td>
                                         <td class="product-name">@item.Product_Name</td>
-                                        <td class="product-price">@item.Product_Price $</td>
+                                        <td class="product-price">@item.Product_Price JD</td>
                                         <td class="product-quantity"><input type="number" placeholder="1"></td>
                                         <td class="product-total">1</td>
                                     </tr>
@@ -70,7 +70,7 @@
                                 @{double finalprice = totalprice; }
                                 <tr class="total-data">
                                     <td><strong>Subtotal: </strong></td>
-                                    <td>@totalprice $</td>
+                                    <td>@totalprice JD</td>
                                 </tr>
                                     @if (totalprice >= 100)
                                     {
@@ -86,13 +86,13 @@
                                         finalprice = totalprice + 15;
                                         <tr class="total-data">
                                             <td><strong>Shipping: </strong></td>
-                                            <td>15$</td>
+                                            <td>15JD</td>
                                         </tr>
                                     }
                                 
                                 <tr class="total-data">
                                     <td><strong>Total: </strong></td>
-                                    <td>@finalprice $</td>
+                                    <td>@finalprice JD</td>
                                 </tr>
                                 
                             </tbody>

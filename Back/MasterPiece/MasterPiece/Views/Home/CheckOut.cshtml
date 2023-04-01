@@ -255,7 +255,7 @@
                             </div>
 
 
-                            <div class="col-md-6">
+                            <div class="col-md-6"> 
 
                                 <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>
 
@@ -278,7 +278,7 @@
                     <a style="color:darkred; " href="@Url.Action("Cart","Home","")">Back To Cart</a>
 
 
-                    <a href="@Url.Action("CheckOutItems","Home","")" class="btn btn-success px-3" style="background-color:green; border:0px;">Pay $ @ViewBag.TotalPrice</a>
+                    <a href="@Url.Action("CheckOutItems","Home","")" class="btn btn-success px-3" style="background-color:green; border:0px;">Pay @ViewBag.TotalPrice JD</a>
 
 
 
@@ -293,7 +293,7 @@
 
                     <span>You have to pay</span>
                     <div class="d-flex flex-row align-items-end mb-3">
-                        <h1 class="mb-0 yellow">$@ViewBag.TotalPrice</h1>
+                        <h1 class="mb-0 yellow">@ViewBag.TotalPrice JD</h1>
                     </div>
 
                     <span>Enjoy all the features and perk after you complete the payment</span>
