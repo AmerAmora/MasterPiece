@@ -120,6 +120,31 @@ namespace MasterPiece.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public ActionResult Feature(int id)
+        {
+            int featuredcount = db.Products.Count(x => x.isFeatured==true);
+            if (featuredcount >= 3) 
+            {
+                TempData["swal_message"] = $"You have reached the max amount of featured products";
+                ViewBag.title = "Error";
+                ViewBag.icon = "error";
+                return Redirect(Request.UrlReferrer.ToString());
+
+            }
+            var Product = db.Products.Find(id);
+            Product.isFeatured = true;
+            db.SaveChanges();
+
+            return View("Index", db.Products.ToList());
+        }
+        public ActionResult UnFeature(int id)
+        {
+            var Product = db.Products.Find(id);
+            Product.isFeatured = false;
+            db.SaveChanges();
+
+            return View("Index", db.Products.ToList());
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -16,7 +16,8 @@ namespace MasterPiece.Controllers
 
         public ActionResult Index()
         {
-            var products = db.Products.ToList();
+            var products = db.Products.OrderByDescending(p => p.Product_id).
+                Where(x=>x.Store.isAccepted==true&&x.isDeleted!=true&&x.Store.isBlocked!=true).ToList();
 
             return View(products);
         }
@@ -29,7 +30,7 @@ namespace MasterPiece.Controllers
         }
         public ActionResult Products()
         {
-            var products = db.Products.Where(x=>x.Store.isBlocked!=true).ToList();
+            var products = db.Products.Where(x=>x.Store.isBlocked!=true&& x.isDeleted !=true).ToList();
 
             return View(products);
         }
@@ -109,14 +110,15 @@ namespace MasterPiece.Controllers
         }
         public ActionResult SingleCategory(int? id)
         {
-            var Products = db.Products.Where(x=>x.Category_id==id).ToList();
+            var Products = db.Products.Where(x=>x.Category_id==id&&x.isDeleted!=true).ToList();
             return View(Products);
         }
         public ActionResult SingleProduct(int? id)
         {
             var Product = db.Products.Where(x => x.Product_id == id).FirstOrDefault();
-
-            return View(Product);
+            var comments = db.Comments.Where(x => x.Product_id == id).ToList();
+            var data = Tuple.Create(comments, Product);
+            return View(data);
         }
         public ActionResult Cart() 
         {
@@ -172,6 +174,15 @@ namespace MasterPiece.Controllers
                     ViewBag.icon = "error";
                     return Redirect(returnUrl);
                 }
+                bool deletedCheck =Convert.ToBoolean(db.Products.Where(x => x.Product_id == id).FirstOrDefault().isDeleted);
+                if (deletedCheck) 
+                {
+                    TempData["swal_message"] = $"This Products has been deleted";
+                    ViewBag.title = "Error";
+                    ViewBag.icon = "error";
+                    return Redirect(returnUrl);
+
+                }
             }
             // add the new item to the cart
             items.Add(id.ToString());
@@ -219,11 +230,42 @@ namespace MasterPiece.Controllers
             // redirect back to the shopping cart view
             return RedirectToAction("Cart");
         }
+        public ActionResult AddComment(int Product_id, string Comment_text, string returnUrl) 
+        {
+            Comment comment = new Comment()
+            {
+                userId = User.Identity.GetUserId(),
+                Product_id = Product_id,
+                commentDate = DateTime.Now.Date,
+                Comment_text = Comment_text
+            };
+            db.Comments.Add(comment);
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+
+        }
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult NoAccess()
+        {
+
+            return View();
+        }
+
+
+        public ActionResult Stores() 
+        {
+            var stores = db.Stores.Where(x=>x.isBlocked!=true&& x.isAccepted==true).ToList();
+            return View(stores);
+        
+        }
+        public ActionResult SingleStore(int? id)
+        {
+            var Products = db.Products.Where(x => x.Store_id == id &&x.isDeleted!=true ).ToList();
+            return View(Products);
         }
 
     }

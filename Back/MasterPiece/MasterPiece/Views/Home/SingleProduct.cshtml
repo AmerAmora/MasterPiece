@@ -1,4 +1,4 @@
-﻿@model MasterPiece.Models.Product
+﻿@model Tuple <List<MasterPiece.Models.Comment>, MasterPiece.Models.Product>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="~/assets/css/CommentStyle.css" rel="stylesheet">
 
@@ -23,7 +23,7 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p>See more Details</p>
-                    <h1>@Model.Product_Name</h1>
+                    <h1>@Model.Item2.Product_Name</h1>
                 </div>
             </div>
         </div>
@@ -36,19 +36,19 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="single-product-img">
-                    <img src="../../ProductImage/@Model.Product_Image" alt="">
+                    <img src="../../ProductImage/@Model.Item2.Product_Image" alt="">
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="single-product-content">
-                    <h3>@Model.Product_Name</h3>
-                    <p class="single-product-pricing"> @Model.Product_Price JD</p>
-                    <p>@Model.Product_Description</p>
+                    <h3>@Model.Item2.Product_Name</h3>
+                    <p class="single-product-pricing"> @Model.Item2.Product_Price JD</p>
+                    <p>@Model.Item2.Product_Description</p>
                     <div class="single-product-form">
                         <form action="index.html">
                             <input type="number" placeholder="1">
                         </form>
-                        <a href="@Url.Action("AddItem","Home" ,new { Id =Model.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <a href="@Url.Action("AddItem","Home" ,new { Id =Model.Item2.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                         <p><strong>Category: </strong>Mouse</p>
                     </div>
                     <h4>Share:</h4>
@@ -67,50 +67,55 @@
 <!-- Comments -->
 
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5 col-md-6 col-12 pb-4">
-                    <h1 style="color:darkred">Comments</h1>
-                    <div class="comment mt-4 text-justify float-left">
-                        <h4>Jhon Doe</h4>
-                        <span class="time">- 20 October, 2018</span>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <h1 style="color:darkred">Comments</h1>
+                @foreach (var item in Model.Item1)
+                {
+                    <div class="comment mt-4 text-justify float-left" style="width: 600px; overflow: hidden; word-wrap: break-word; white-space: pre-wrap;">
+                        <h4>@item.AspNetUser.first_Name @item.AspNetUser.last_Name</h4>
+                        <span class="time">@item.commentDate</span>
                         <br>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                        <p>@item.Comment_text</p>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+
+                }
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
 
 
-                    @using (Html.BeginForm("AddComment", "Home", FormMethod.Post, new { @class = "addComment", @id = "algin-form" }))
+                @using (Html.BeginForm("AddComment", "Home", FormMethod.Post, new { @class = "addComment", @id = "algin-form" }))
+                {
+                    <input name="Product_id" id="Product_id" value="@Model.Item2.Product_id" style="visibility:hidden;"/>
+                    <div class="form-group">
+                        <div class="leaveCommentTitle">Leave a comment</div>
+                        <br />
+                        <label for="message">Message</label>
+                        <textarea name="Comment_text" required msg cols="30" rows="5" class="form-control" style="background-color: white;"></textarea>
+                    </div>
+                    if (User.Identity.IsAuthenticated)
                     {
                         <div class="form-group">
-                            <div class="leaveCommentTitle">Leave a comment</div>
-                            <br />
-                            <label for="message">Message</label>
-                            <textarea name="msg" id="" msg cols="30" rows="5" class="form-control" style="background-color: white;"></textarea>
+                            <button type="submit" id="post" class="btn">Post Comment</button>
                         </div>
-                        if (User.Identity.IsAuthenticated)
-                        {
-                            <div class="form-group">
-                                <button type="submit" id="post" class="btn">Post Comment</button>
-                            </div>
 
-                        }
-                        else 
-                        { 
-                               <div class="form-group">
-                               <button type="submit" id="post" class="btn" disabled>Post Comment</button>
-                                   <div class="hide">Please Login to Add a comment</div>
-                               </div>
-                               
-                        }
                     }
-                </div>
+                    else
+                    {
+                        <div class="form-group">
+                            <button type="submit" id="post" class="btn" disabled>Post Comment</button>
+                            <div class="hide">Please Login to Add a comment</div>
+                        </div>
+
+                    }
+                }
             </div>
         </div>
-    </section>
-    
+    </div>
+</section>
+
 
 <br />
 

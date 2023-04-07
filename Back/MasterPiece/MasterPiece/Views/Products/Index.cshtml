@@ -19,6 +19,10 @@
         .thumbnail:hover {
             transform: scale(3);
         }
+
+    .btn {
+        width: 120px !important;
+    }
 </style>
 <div style="text-align:center">
     <h2>Products</h2>
@@ -76,6 +80,19 @@
                                         <img src="../../ProductImage/@item.Product_Image" class="thumbnail" width="50px" height="50px" />
                                     </td>
                                     <td>
+                                        @if (item.isFeatured == false || item.isFeatured == null)
+                                        {
+
+                                            @Html.ActionLink("Feature It", "Feature", new { id = item.Product_id }, new { @class = "btn btn-success" })
+
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("Unfeature It", "UnFeature", new { id = item.Product_id }, new { @class = "btn btn-danger" })
+
+                                        }
+                                    </td>
+                                    <td>
                                         @Html.ActionLink("Delete", "Delete", new { id = item.Product_id })
                                     </td>
 
@@ -90,3 +107,15 @@
         </div>
     </div>
 </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (TempData["swal_message"] != null)
+{
+    <script>
+    swal({
+      title: "@ViewBag.title",
+      text: "@TempData["swal_message"]",
+      icon: "@ViewBag.icon"
+    });
+    </script>
+}

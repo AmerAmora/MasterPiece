@@ -63,7 +63,7 @@ namespace MasterPiece.Controllers
             }
             int storeCheck=Convert.ToInt32(db.Products.Where(x=>x.Product_id==id).Select(x=>x.Store_id).FirstOrDefault());
             int loggedStoreId = Convert.ToInt32(Session["LoggedStoreId"]);
-            if (storeCheck != loggedStoreId) { return View("Error"); }
+            if (storeCheck != loggedStoreId) { return View("NoAccess"); }
             Product product = await db.Products.FindAsync(id);
             if (product == null)
             {
@@ -112,7 +112,7 @@ namespace MasterPiece.Controllers
             }
             int storeCheck = Convert.ToInt32(db.Products.Where(x => x.Product_id == id).Select(x => x.Store_id).FirstOrDefault());
             int loggedStoreId = Convert.ToInt32(Session["LoggedStoreId"]);
-            if (storeCheck != loggedStoreId) { return View("Error"); }
+            if (storeCheck != loggedStoreId) { return View("NoAccess"); }
             Product product = await db.Products.FindAsync(id);
             if (product == null)
             {

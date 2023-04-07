@@ -115,6 +115,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MasterPieceModel.Product">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="isFeatured" ColumnName="isFeatured" />
           <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
           <ScalarProperty Name="Product_id" ColumnName="Product_id" />
           <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />

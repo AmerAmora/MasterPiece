@@ -143,6 +143,7 @@
     <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__Produ__60A75C0F" FromRole="Products" ToRole="Order_Details" />
     <NavigationProperty Name="Store" Relationship="Self.FK__Products__Store___5535A963" FromRole="Products" ToRole="Stores" />
     <Property Name="isDeleted" Type="Boolean" />
+    <Property Name="isFeatured" Type="Boolean" />
   </EntityType>
   <EntityType Name="Store">
     <Key>

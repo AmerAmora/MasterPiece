@@ -123,6 +123,7 @@
           <Property Name="Store_id" Type="int" />
           <Property Name="Category_id" Type="int" />
           <Property Name="isDeleted" Type="bit" />
+          <Property Name="isFeatured" Type="bit" />
         </EntityType>
         <EntityType Name="Stores">
           <Key>
@@ -569,6 +570,7 @@
           <NavigationProperty Name="Order_Details" Relationship="Self.FK__Order_Det__Produ__60A75C0F" FromRole="Products" ToRole="Order_Details" />
           <NavigationProperty Name="Store" Relationship="Self.FK__Products__Store___5535A963" FromRole="Products" ToRole="Stores" />
           <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="isFeatured" Type="Boolean" />
         </EntityType>
         <EntityType Name="Store">
           <Key>
@@ -993,6 +995,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="MasterPieceModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="isFeatured" ColumnName="isFeatured" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Product_id" ColumnName="Product_id" />
                 <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />

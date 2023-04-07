@@ -298,6 +298,7 @@
     <Content Include="assets\css\magnific-popup.css" />
     <Content Include="assets\css\main.css" />
     <Content Include="assets\css\meanmenu.min.css" />
+    <Content Include="assets\css\NoAccessstyle.css" />
     <Content Include="assets\css\owl.carousel.css" />
     <Content Include="assets\css\responsive.css" />
     <Content Include="assets\css\scss\pages\_404.css" />
@@ -654,6 +655,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="Views\Shared\NoAccess.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -722,6 +724,8 @@
     <Content Include="Views\Home\SingleProduct.cshtml" />
     <Content Include="Views\OwnerDashboard\Edit.cshtml" />
     <Content Include="Views\OwnerDashboard\Delete.cshtml" />
+    <Content Include="Views\Home\Stores.cshtml" />
+    <Content Include="Views\Home\SingleStore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />

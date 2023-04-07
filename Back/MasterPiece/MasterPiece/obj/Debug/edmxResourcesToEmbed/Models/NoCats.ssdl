@@ -118,6 +118,7 @@
     <Property Name="Store_id" Type="int" />
     <Property Name="Category_id" Type="int" />
     <Property Name="isDeleted" Type="bit" />
+    <Property Name="isFeatured" Type="bit" />
   </EntityType>
   <EntityType Name="Stores">
     <Key>
