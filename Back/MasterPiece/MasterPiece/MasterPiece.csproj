@@ -294,6 +294,7 @@
     <Content Include="assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="assets\css\all.min.css" />
     <Content Include="assets\css\animate.css" />
+    <Content Include="assets\css\CommentStyle.css" />
     <Content Include="assets\css\magnific-popup.css" />
     <Content Include="assets\css\main.css" />
     <Content Include="assets\css\meanmenu.min.css" />
@@ -719,6 +720,8 @@
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\CheckOut.cshtml" />
     <Content Include="Views\Home\SingleProduct.cshtml" />
+    <Content Include="Views\OwnerDashboard\Edit.cshtml" />
+    <Content Include="Views\OwnerDashboard\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />

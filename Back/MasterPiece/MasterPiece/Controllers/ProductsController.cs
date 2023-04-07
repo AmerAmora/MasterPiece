@@ -1,5 +1,6 @@
 ﻿using MasterPiece.Models;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace MasterPiece.Controllers
         // GET: Products
         public async Task<ActionResult> Index()
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Store);
+            var products = db.Products.Where(x=>x.isDeleted !=true).Include(p => p.Category).Include(p => p.Store);
             return View(await products.ToListAsync());
         }
 
@@ -115,7 +116,7 @@ namespace MasterPiece.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Product product = await db.Products.FindAsync(id);
-            db.Products.Remove(product);
+            product.isDeleted = true;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

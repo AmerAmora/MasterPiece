@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3dfa6de9dc634a3989f54f2f53e166b4" Name="Diagram1" ZoomLevel="86">
+      <Diagram DiagramId="3dfa6de9dc634a3989f54f2f53e166b4" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="MasterPieceModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.AspNetRole" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MasterPieceModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />

@@ -73,6 +73,7 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="MasterPieceModel.Category">
         <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
           <ScalarProperty Name="Category_id" ColumnName="Category_id" />
           <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
           <ScalarProperty Name="Category_Image" ColumnName="Category_Image" />
@@ -82,6 +83,7 @@
     <EntitySetMapping Name="Comments">
       <EntityTypeMapping TypeName="MasterPieceModel.Comment">
         <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="commentDate" ColumnName="commentDate" />
           <ScalarProperty Name="Comment_id" ColumnName="Comment_id" />
           <ScalarProperty Name="Comment_text" ColumnName="Comment_text" />
           <ScalarProperty Name="userId" ColumnName="userId" />
@@ -113,6 +115,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MasterPieceModel.Product">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
           <ScalarProperty Name="Product_id" ColumnName="Product_id" />
           <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
           <ScalarProperty Name="Product_Image" ColumnName="Product_Image" />

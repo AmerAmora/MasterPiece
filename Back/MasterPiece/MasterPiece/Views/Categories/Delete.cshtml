@@ -4,38 +4,53 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
+<style>
+    dt {
+        color: darkred;
+    }
+</style>
 <div style="text-align:center">
     <h3>Are you sure you want to delete <span style="color:#861523; font-weight: bolder;">@Model.Category_Name</span>?</h3>
 
 </div>
 
-<div style="text-align:center">
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Category Name
-            </dt>
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 50vh;">
+        <div class="col-12 col-sm-8 col-md-10 col-lg-10 col-xl-8">
+            <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a href="index.html" class="">
+                        <h3 class="text-primary"><img src="../../AdminContent/img/noCatsLogo.png" width="50px" height="50px"> NoCats</h3>
+                    </a>
+                    <h3>Delete Category</h3>
+                </div>    <h4>@Model.Category_Name</h4>
+                <hr />    <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Category Name
+                        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Category_Name)
-            </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Category_Name)
+                        </dd>
 
-            <dt>
-                Image
-            </dt>
+                        <dt>
+                            Image
+                        </dt>
 
-            <dd>
-                <img src="../../AdminContent/CategoryImages/@Model.Category_Image" style="width:400px; height:400px" />
-            </dd>
+                        <dd>
+                            <img src="../../AdminContent/CategoryImages/@Model.Category_Image" style="width:400px; height:400px" />
+                        </dd>
 
-        </dl>
+                    </dl>
+                </div>
+                <p>
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Category_id }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
     </div>
-    <p>
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Category_id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 </div>

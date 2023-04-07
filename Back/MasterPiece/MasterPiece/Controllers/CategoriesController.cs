@@ -16,7 +16,7 @@ namespace MasterPiece.Controllers
         // GET: Categories
         public async Task<ActionResult> Index()
         {
-            return View(await db.Categories.ToListAsync());
+            return View(await db.Categories.Where(x=>x.isDeleted !=true).ToListAsync());
         }
 
         // GET: Categories/Details/5

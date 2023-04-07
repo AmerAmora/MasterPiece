@@ -18,6 +18,7 @@ namespace MasterPiece.Models
         public string Comment_text { get; set; }
         public string userId { get; set; }
         public Nullable<int> Product_id { get; set; }
+        public Nullable<System.DateTime> commentDate { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Product Product { get; set; }

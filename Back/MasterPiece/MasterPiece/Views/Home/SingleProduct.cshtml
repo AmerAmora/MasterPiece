@@ -1,9 +1,21 @@
 ﻿@model MasterPiece.Models.Product
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/assets/css/CommentStyle.css" rel="stylesheet">
 
 @{
     ViewBag.Title = "SingleProduct";
     Layout = "~/Views/Shared/MainLayout.cshtml";
 }
+<style>
+    .hide {
+        display: none;
+    }
+
+    .btn:hover + .hide {
+        display: block;
+        color: white;
+    }
+</style>
 
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -52,57 +64,56 @@
     </div>
 </div>
 <!-- end single product -->
-<!-- more products -->
-<div class="more-products mb-150">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 text-center">
-                <div class="section-title">
-                    <h3><span class="orange-text">Related</span> Products</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+<!-- Comments -->
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 col-md-6 col-12 pb-4">
+                    <h1 style="color:darkred">Comments</h1>
+                    <div class="comment mt-4 text-justify float-left">
+                        <h4>Jhon Doe</h4>
+                        <span class="time">- 20 October, 2018</span>
+                        <br>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+
+
+                    @using (Html.BeginForm("AddComment", "Home", FormMethod.Post, new { @class = "addComment", @id = "algin-form" }))
+                    {
+                        <div class="form-group">
+                            <div class="leaveCommentTitle">Leave a comment</div>
+                            <br />
+                            <label for="message">Message</label>
+                            <textarea name="msg" id="" msg cols="30" rows="5" class="form-control" style="background-color: white;"></textarea>
+                        </div>
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="form-group">
+                                <button type="submit" id="post" class="btn">Post Comment</button>
+                            </div>
+
+                        }
+                        else 
+                        { 
+                               <div class="form-group">
+                               <button type="submit" id="post" class="btn" disabled>Post Comment</button>
+                                   <div class="hide">Please Login to Add a comment</div>
+                               </div>
+                               
+                        }
+                    }
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 text-center Mouse">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a href="single-product.html"><img src="assets/img/products/HyperXMouse.png" alt=""></a>
-                    </div>
-                    <h3>
-                        Hyper X Mouse
-                    </h3>
-                    <p class="product-price">85JD </p>
-                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 text-center Mouse">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a href="single-product.html"><img src="assets/img/products/HyperXMouse.png" alt=""></a>
-                    </div>
-                    <h3>
-                        Hyper X Mouse
-                    </h3>
-                    <p class="product-price">85JD</p>
-                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 text-center HeadSet">
-                <div class="single-product-item">
-                    <div class="product-image">
-                        <a href="single-product.html"><img src="assets/img/products/HeadSet.png" alt=""></a>
-                    </div>
-                    <h3>
-                        Razer Headhset
-                    </h3>
-                    <p class="product-price">99JD </p>
-                    <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </section>
+    
+
+<br />
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if (TempData["swal_message"] != null)
 {

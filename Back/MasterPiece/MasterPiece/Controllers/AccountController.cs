@@ -78,6 +78,7 @@ namespace MasterPiece.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
+              
                 case SignInStatus.Success:
                     string userID = db.AspNetUsers.Where(x => x.Email == model.Email).Select(x => x.Id).FirstOrDefault();
                     string rolecheck=db.AspNetUserRoles.Where(x=>x.UserId== userID).Select(x=>x.RoleId).FirstOrDefault();
@@ -94,7 +95,7 @@ namespace MasterPiece.Controllers
                         if (loggedstore.isBlocked != true)
                         {
                             Session["LoggedStoreId"] = loggedstore.Store_id;   
-                            return RedirectToAction("Index", "OwnerDashboard",new { id = loggedstore.Store_id });
+                            return RedirectToAction("Index", "OwnerDashboard");
                         }
                         else {
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

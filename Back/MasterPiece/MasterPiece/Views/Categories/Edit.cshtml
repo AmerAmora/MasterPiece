@@ -6,7 +6,7 @@
 }
 
 <div style="text-align:center">
-    <h2>Editing @Model.Category_Name</h2>
+    <h2>Editing <span style="color:darkred">@Model.Category_Name</span></h2>
 </div>
 
 @using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -22,7 +22,7 @@
                         <a href="index.html" class="">
                             <h3 class="text-primary"><img src="../../AdminContent/img/noCatsLogo.png" width="50px" height="50px"> NoCats</h3>
                         </a>
-                        <h3>Add Category</h3>
+                        <h3>Edit Category</h3>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="Category_Name" name="Category_Name" value="@Model.Category_Name">
