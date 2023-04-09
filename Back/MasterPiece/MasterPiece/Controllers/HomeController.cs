@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace MasterPiece.Controllers
 {
@@ -18,8 +19,11 @@ namespace MasterPiece.Controllers
         {
             var products = db.Products.OrderByDescending(p => p.Product_id).
                 Where(x=>x.Store.isAccepted==true&&x.isDeleted!=true&&x.Store.isBlocked!=true).ToList();
+            var testimonia = db.testimonials.Where(x=>x.isAccepted==true).ToList();
+            var data = Tuple.Create(products, testimonia);
 
-            return View(products);
+
+            return View(data);
         }
 
         public ActionResult About()
@@ -267,6 +271,26 @@ namespace MasterPiece.Controllers
             var Products = db.Products.Where(x => x.Store_id == id &&x.isDeleted!=true ).ToList();
             return View(Products);
         }
+        public ActionResult Testimonial() 
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Testimonial(string userMessage,string UserName,HttpPostedFileBase userImage)
+        {
+            testimonial testimonial= new testimonial();
+            testimonial.UserName = UserName;
+            testimonial.userMessage=userMessage;
+            Guid guid = Guid.NewGuid();
+            string path = guid + userImage.FileName;
+            userImage.SaveAs(Server.MapPath("../assets/img/" + path));
+            testimonial.userImage = path;
+            db.testimonials.Add(testimonial);
+            db.SaveChanges();
+            return View();
+        }
+
+
 
     }
 }

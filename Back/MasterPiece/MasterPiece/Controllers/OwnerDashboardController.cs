@@ -131,6 +131,73 @@ namespace MasterPiece.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public ActionResult StoreSales()
+        {
+            int loggedStore =Convert.ToInt32(Session["LoggedStoreId"]);
+            ViewBag.totalSales = db.Transactions.Where(x=>x.Order.Store_Id==loggedStore).Sum(x => x.Amount);
+            DateTime today = DateTime.Today;
+            DateTime startOfToday = today.Date;
+            DateTime endOfToday = startOfToday.AddDays(1).AddTicks(-1);
+            double totalSales = Convert.ToDouble(db.Transactions
+                .Where(x => x.TransactionDate >= startOfToday && x.TransactionDate <= endOfToday&& x.Order.Store_Id==loggedStore)
+                .Sum(x => x.Amount));
+            if (totalSales == null)
+                ViewBag.todaySales = 0;
+            else
+                ViewBag.todaySales = totalSales;
+            ViewBag.todaysRevenue = ViewBag.todaySales * 10 / 100;
+
+            ViewBag.totalRevenue = ViewBag.totalSales * 10 / 100;
+
+
+            return View();
+        }
+
+        public async Task<ActionResult> Profile()
+        {
+
+           
+            int loggedStoreId = Convert.ToInt32(Session["LoggedStoreId"]);
+            Store store = await db.Stores.FindAsync(loggedStoreId);
+            if (store == null)
+            {
+                return HttpNotFound();
+            }
+           
+            return View(store);
+        }
+
+        // POST: Products/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Profile( HttpPostedFileBase Store_Image)
+        {
+            int loggedStoreId = Convert.ToInt32(Session["LoggedStoreId"]);
+            Store store = await db.Stores.FindAsync(loggedStoreId);
+            if (ModelState.IsValid)
+            {
+                if (Store_Image != null)
+                {
+                    Guid guid = Guid.NewGuid();
+                    string path = guid + Store_Image.FileName;
+                    Store_Image.SaveAs(Server.MapPath("../Images/" + path));
+                    store.Store_Image = path;
+                }
+                else
+                {
+                    var existingModel = db.Stores.AsNoTracking().FirstOrDefault(x => x.Store_id == loggedStoreId);
+                    store.Store_Image = existingModel.Store_Image;
+                }
+                store.Store_Name = Request["Store_Name"];
+                store.Owner_Name = Request["Owner_Name"];
+                await db.SaveChangesAsync();
+                return RedirectToAction("Profile");
+            }
+           
+            return View(store);
+        }
 
 
     }

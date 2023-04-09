@@ -34,6 +34,7 @@
         <AssociationConnector Association="MasterPieceModel.FK__Products__Store___5535A963" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MasterPieceModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="MasterPieceModel.FK__Orders__Store_Id__01142BA1" />
+        <EntityTypeShape EntityType="MasterPieceModel.testimonial" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

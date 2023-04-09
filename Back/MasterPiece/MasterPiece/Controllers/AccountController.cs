@@ -94,8 +94,10 @@ namespace MasterPiece.Controllers
                     {
                         if (loggedstore.isBlocked != true)
                         {
-                            Session["LoggedStoreId"] = loggedstore.Store_id;   
-                            return RedirectToAction("Index", "OwnerDashboard");
+                            Session["LoggedStoreId"] = loggedstore.Store_id;
+
+                            Session["LggedStore"] = loggedstore;
+                            return RedirectToAction("StoreSales", "OwnerDashboard");
                         }
                         else {
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

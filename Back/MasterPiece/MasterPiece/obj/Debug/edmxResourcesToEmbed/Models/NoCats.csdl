@@ -425,6 +425,7 @@
       <End Role="Store" EntitySet="Stores" />
       <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
+    <EntitySet Name="testimonials" EntityType="MasterPieceModel.testimonial" />
   </EntityContainer>
   <EntityType Name="sysdiagram">
     <Key>
@@ -448,4 +449,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="testimonial">
+    <Key>
+      <PropertyRef Name="Testimonial_id" />
+    </Key>
+    <Property Name="Testimonial_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="userImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="userMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="isAccepted" Type="Boolean" />
+  </EntityType>
 </Schema>

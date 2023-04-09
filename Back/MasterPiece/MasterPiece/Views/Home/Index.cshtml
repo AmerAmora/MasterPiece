@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MasterPiece.Models.Product>
+﻿@model Tuple<List<MasterPiece.Models.Product>, List<MasterPiece.Models.testimonial>>
+
 @{
     Layout = "~/Views/Shared/MainLayout.cshtml";
 
@@ -80,28 +81,29 @@
         <div class="row">
             @{
                 int counter = 0;
-                foreach (var item in Model)
+                foreach (var item in Model.Item1)
                 {
                     bool check = Convert.ToBoolean(item.isFeatured);
-                    if (check) {
-                    <div class="col-lg-4 col-md-6 text-center">
-                        <div class="single-product-item">
-                            <div class="product-image">
-                                <a href="@Url.Action("SingleProduct", "Home", new { id=item.Product_id})"><img src="../ProductImage/@item.Product_Image" alt=""></a>
-                            </div>
-                            <h3>
-                                @item.Product_Name
-                            </h3>
-                            <p class="product-price" style="font-size:14px">@item.Store.Store_Name</p>
+                    if (check)
+                    {
+                        <div class="col-lg-4 col-md-6 text-center">
+                            <div class="single-product-item">
+                                <div class="product-image">
+                                    <a href="@Url.Action("SingleProduct", "Home", new { id=item.Product_id})"><img src="../ProductImage/@item.Product_Image" alt=""></a>
+                                </div>
+                                <h3>
+                                    @item.Product_Name
+                                </h3>
+                                <p class="product-price" style="font-size:14px">@item.Store.Store_Name</p>
 
-                            <p class="product-price">@item.Product_Price JD </p>
-                            <a href="@Url.Action("AddItem","Home", new { Id =item.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                <p class="product-price">@item.Product_Price JD </p>
+                                <a href="@Url.Action("AddItem","Home", new { Id =item.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
                         </div>
-                    </div>
                         if (counter == 2) { break; }
                         counter++;
                     }
-            }
+                }
             }
         </div>
     </div>
@@ -121,28 +123,28 @@
         <div class="row">
             @{
                 int newcounter = 0;
-                foreach (var item in Model)
+                foreach (var item in Model.Item1)
                 {
-                    
-                        <div class="col-lg-4 col-md-6 text-center">
-                            <div class="single-product-item">
-                                <div class="product-image">
-                                    <a href="@Url.Action("SingleProduct", "Home", new { id=item.Product_id})"><img src="../ProductImage/@item.Product_Image" alt=""></a>
-                                </div>
-                                <h3>
-                                    @item.Product_Name
-                                </h3>
-                                <p class="product-price" style="font-size:14px">@item.Store.Store_Name</p>
 
-                                <p class="product-price">@item.Product_Price JD </p>
-                                <a href="@Url.Action("AddItem","Home", new { Id =item.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    <div class="col-lg-4 col-md-6 text-center">
+                        <div class="single-product-item">
+                            <div class="product-image">
+                                <a href="@Url.Action("SingleProduct", "Home", new { id=item.Product_id})"><img src="../ProductImage/@item.Product_Image" alt=""></a>
                             </div>
+                            <h3>
+                                @item.Product_Name
+                            </h3>
+                            <p class="product-price" style="font-size:14px">@item.Store.Store_Name</p>
+
+                            <p class="product-price">@item.Product_Price JD </p>
+                            <a href="@Url.Action("AddItem","Home", new { Id =item.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                         </div>
+                    </div>
                     if (newcounter == 2) { break; }
                     newcounter++;
                 }
-                }
-            
+            }
+
         </div>
     </div>
 </div>
@@ -152,48 +154,25 @@
         <div class="row">
             <div class="col-lg-10 offset-lg-1 text-center">
                 <div class="testimonial-sliders">
+                    @foreach (var item in Model.Item2)
+                    {
+
+
                     <div class="single-testimonial-slider">
                         <div class="client-avater">
-                            <img src="../assets/img/avaters/avatar1.png" alt="">
+                            <img src="../assets/img/@item.userImage" alt="">
                         </div>
                         <div class="client-meta">
-                            <h3>Saira Hakim <span>Local shop owner</span></h3>
+                            <h3>@item.UserName</h3>
                             <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+                                @item.userMessage
                             </p>
                             <div class="last-icon">
                                 <i class="fas fa-quote-right"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="single-testimonial-slider">
-                        <div class="client-avater">
-                            <img src="../assets/img/avaters/avatar2.png" alt="">
-                        </div>
-                        <div class="client-meta">
-                            <h3>David Niph <span>Local shop owner</span></h3>
-                            <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                            </p>
-                            <div class="last-icon">
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-testimonial-slider">
-                        <div class="client-avater">
-                            <img src="../assets/img/avaters/avatar3.png" alt="">
-                        </div>
-                        <div class="client-meta">
-                            <h3>Jacob Sikim <span>Local shop owner</span></h3>
-                            <p class="testimonial-body">
-                                " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                            </p>
-                            <div class="last-icon">
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -201,31 +180,7 @@
 </div>
 <!-- end testimonail-section -->
 <!-- logo carousel -->
-<div class="logo-carousel-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="logo-carousel-inner">
-                    <div class="single-logo-item">
-                        <img src="../assets/img/company-logos/1.png" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="../assets/img/company-logos/2.png" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="../assets/img/company-logos/3.png" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="../assets/img/company-logos/4.png" alt="">
-                    </div>
-                    <div class="single-logo-item">
-                        <img src="../assets/img/company-logos/5.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- end logo carousel -->
 <!-- footer -->
 <!-- end footer -->

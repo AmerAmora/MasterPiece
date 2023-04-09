@@ -149,6 +149,16 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="testimonials">
+          <Key>
+            <PropertyRef Name="Testimonial_id" />
+          </Key>
+          <Property Name="Testimonial_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="userImage" Type="varchar(max)" />
+          <Property Name="userMessage" Type="varchar(max)" />
+          <Property Name="isAccepted" Type="bit" />
+        </EntityType>
         <EntityType Name="Transactions">
           <Key>
             <PropertyRef Name="TransactionId" />
@@ -361,6 +371,7 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="testimonials" EntityType="Self.testimonials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Comments__Produc__52593CB8" Association="Self.FK__Comments__Produc__52593CB8">
             <End Role="Products" EntitySet="Products" />
@@ -852,6 +863,7 @@
             <End Role="Store" EntitySet="Stores" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <EntitySet Name="testimonials" EntityType="MasterPieceModel.testimonial" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -875,6 +887,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="testimonial">
+          <Key>
+            <PropertyRef Name="Testimonial_id" />
+          </Key>
+          <Property Name="Testimonial_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isAccepted" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1042,6 +1064,17 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="testimonials">
+            <EntityTypeMapping TypeName="MasterPieceModel.testimonial">
+              <MappingFragment StoreEntitySet="testimonials">
+                <ScalarProperty Name="isAccepted" ColumnName="isAccepted" />
+                <ScalarProperty Name="userMessage" ColumnName="userMessage" />
+                <ScalarProperty Name="userImage" ColumnName="userImage" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Testimonial_id" ColumnName="Testimonial_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

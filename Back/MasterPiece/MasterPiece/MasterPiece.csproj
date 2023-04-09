@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminstatController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Controllers\OwnerDashboardController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
+    <Compile Include="Controllers\testimonialsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,6 +238,9 @@
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>NoCats.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\testimonial.cs">
       <DependentUpon>NoCats.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transaction.cs">
@@ -353,6 +358,7 @@
     <Content Include="assets\img\team\team-1.jpg" />
     <Content Include="assets\img\team\team-2.jpg" />
     <Content Include="assets\img\team\team-3.jpg" />
+    <Content Include="assets\img\Wavy_Gen-01_Single-06.jpg" />
     <Content Include="assets\js\form-validate.js" />
     <Content Include="assets\js\jquery-1.11.3.min.js" />
     <Content Include="assets\js\jquery.countdown.js" />
@@ -363,6 +369,36 @@
     <Content Include="assets\js\owl.carousel.min.js" />
     <Content Include="assets\js\sticker.js" />
     <Content Include="assets\js\waypoints.js" />
+    <Content Include="assets\TestimonialAssets\css\main.css" />
+    <Content Include="assets\TestimonialAssets\css\util.css" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\OFL.txt" />
+    <Content Include="assets\TestimonialAssets\images\icons\favicon.ico" />
+    <Content Include="assets\TestimonialAssets\images\img-01.png" />
+    <Content Include="assets\TestimonialAssets\js\main.js" />
+    <Content Include="assets\TestimonialAssets\vendor\animate\animate.css" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\js\popper.js" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="assets\TestimonialAssets\vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="assets\TestimonialAssets\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="assets\TestimonialAssets\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="assets\TestimonialAssets\vendor\select2\select2.css" />
+    <Content Include="assets\TestimonialAssets\vendor\select2\select2.js" />
+    <Content Include="assets\TestimonialAssets\vendor\select2\select2.min.css" />
+    <Content Include="assets\TestimonialAssets\vendor\select2\select2.min.js" />
+    <Content Include="assets\TestimonialAssets\vendor\tilt\tilt.jquery.min.js" />
     <Content Include="assets\webfonts\fa-brands-400.svg" />
     <Content Include="assets\webfonts\fa-regular-400.svg" />
     <Content Include="assets\webfonts\fa-solid-900.svg" />
@@ -644,6 +680,63 @@
     <Content Include="Models\NoCats.edmx.diagram">
       <DependentUpon>NoCats.edmx</DependentUpon>
     </Content>
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-Black.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-BlackItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-Bold.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-BoldItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-ExtraBold.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-ExtraLight.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-Italic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-Light.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-LightItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-Medium.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-MediumItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-Regular.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-SemiBold.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-Thin.ttf" />
+    <Content Include="assets\TestimonialAssets\fonts\montserrat\Montserrat-ThinItalic.ttf" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets\TestimonialAssets\vendor\bootstrap\css\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -655,6 +748,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Adminstat\Index.cshtml" />
+    <Content Include="Views\OwnerDashboard\StoreSales.cshtml" />
+    <Content Include="Views\OwnerDashboard\Profile.cshtml" />
+    <Content Include="Views\Home\Testimonial.cshtml" />
     <None Include="Views\Shared\NoAccess.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -726,6 +823,8 @@
     <Content Include="Views\OwnerDashboard\Delete.cshtml" />
     <Content Include="Views\Home\Stores.cshtml" />
     <Content Include="Views\Home\SingleStore.cshtml" />
+    <Content Include="Views\testimonials\Index.cshtml" />
+    <Content Include="Views\testimonials\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminContent\CategoryImages\" />

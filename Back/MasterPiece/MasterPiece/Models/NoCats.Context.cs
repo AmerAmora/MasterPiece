@@ -39,5 +39,6 @@ namespace MasterPiece.Models
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<testimonial> testimonials { get; set; }
     }
 }

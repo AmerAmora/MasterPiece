@@ -144,6 +144,16 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="testimonials">
+    <Key>
+      <PropertyRef Name="Testimonial_id" />
+    </Key>
+    <Property Name="Testimonial_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="userImage" Type="varchar(max)" />
+    <Property Name="userMessage" Type="varchar(max)" />
+    <Property Name="isAccepted" Type="bit" />
+  </EntityType>
   <EntityType Name="Transactions">
     <Key>
       <PropertyRef Name="TransactionId" />
@@ -356,6 +366,7 @@
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="testimonials" EntityType="Self.testimonials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Comments__Produc__52593CB8" Association="Self.FK__Comments__Produc__52593CB8">
       <End Role="Products" EntitySet="Products" />

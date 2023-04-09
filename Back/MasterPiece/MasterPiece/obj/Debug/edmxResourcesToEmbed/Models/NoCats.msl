@@ -165,5 +165,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="testimonials">
+      <EntityTypeMapping TypeName="MasterPieceModel.testimonial">
+        <MappingFragment StoreEntitySet="testimonials">
+          <ScalarProperty Name="isAccepted" ColumnName="isAccepted" />
+          <ScalarProperty Name="userMessage" ColumnName="userMessage" />
+          <ScalarProperty Name="userImage" ColumnName="userImage" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Testimonial_id" ColumnName="Testimonial_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
