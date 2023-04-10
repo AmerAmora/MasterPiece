@@ -108,3 +108,80 @@
         </div>
     </div>
 </div>
+<script>
+function increaseQuantity(productId) {
+    // get the current cart cookie value
+    var cartCookie = getCookie("cart");
+
+    // split the cookie value into an array of "productId:quantity" pairs
+    var cartItems = cartCookie ? cartCookie.split(",") : [];
+
+    // find the item in the cart with the matching product ID
+    var found = false;
+    for (var i = 0; i < cartItems.length; i++) {
+        var parts = cartItems[i].split(":");
+        if (parts[0] == productId) {
+            found = true;
+            parts[1]++;
+            cartItems[i] = parts.join(":");
+            break;
+        }
+    }
+
+    // if the item wasn't found, add it to the cart with a quantity of 1
+    if (!found) {
+        cartItems.push(productId + ":1");
+    }
+
+    // set the new cookie value and refresh the page
+    setCookie("cart", cartItems.join(","), 7);
+    location.reload();
+}
+
+function decreaseQuantity(productId) {
+    // get the current cart cookie value
+    var cartCookie = getCookie("cart");
+
+    // split the cookie value into an array of "productId:quantity" pairs
+    var cartItems = cartCookie ? cartCookie.split(",") : [];
+
+    // find the item in the cart with the matching product ID
+    var found = false;
+    for (var i = 0; i < cartItems.length; i++) {
+        var parts = cartItems[i].split(":");
+        if (parts[0] == productId) {
+            found = true;
+            if (parts[1] > 1) {
+                parts[1]--;
+                cartItems[i] = parts.join(":");
+            } else {
+                cartItems.splice(i, 1);
+            }
+            break;
+        }
+    }
+
+    // set the new cookie value and refresh the page
+    setCookie("cart", cartItems.join(","), 7);
+    location.reload();
+}
+
+// helper function to get a cookie value by name
+function getCookie(name) {
+    var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    if (match) {
+        return match[2];
+    }
+}
+
+// helper function to set a cookie value
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+</script>

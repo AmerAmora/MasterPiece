@@ -124,24 +124,35 @@ namespace MasterPiece.Controllers
             var data = Tuple.Create(comments, Product);
             return View(data);
         }
-        public ActionResult Cart() 
+        public ActionResult Cart()
         {
             HttpCookie cart = Request.Cookies["cart"];
             List<Product> allProducts = new List<Product>();
+            int cartQuantity = 0; // initialize cart quantity variable
+            dynamic UserProducts = new List<Product>();
+
             if (cart != null)
             {
                 // read the cart items from the cookie
                 List<string> items = new List<string>(cart.Value.Split('|'));
-                dynamic UserProducts=new Product();
 
-                foreach (var product in items) {
-                    int id = Convert.ToInt32(product);
+                foreach (var item in items)
+                {
+                    int id = Convert.ToInt32(item.Split('_')[0]);
+                    int quantity = Convert.ToInt32(item.Split('_')[1]);
                     List<Product> itemProducts = db.Products.Where(x => x.Product_id == id).ToList();
+
+                    // set the quantity for each product
+                    foreach (var product in itemProducts)
+                    {
+                        product.Quantity = quantity;
+                        cartQuantity += quantity; // increment cart quantity
+                    }
+
                     allProducts.AddRange(itemProducts);
                 }
+
                 UserProducts = allProducts;
-                // render the shopping cart view with the cart items
-                return View(UserProducts);
             }
             else
             {
@@ -150,15 +161,17 @@ namespace MasterPiece.Controllers
                 return View(model);
             }
 
+            // pass cart quantity to the view
+            ViewBag.CartQuantity = cartQuantity;
+            // or you can add it as a property of the model:
+            // ViewBag.UserProducts = UserProducts;
+            // ViewBag.CartQuantity = cartQuantity;
+            return View(UserProducts);
         }
         public ActionResult AddItem(int id, string returnUrl)
         {
-            // add the selected item to the shopping cart
-            // ...
-
             // create a new cart cookie
             HttpCookie cart = new HttpCookie("cart");
-
 
             // read the existing cart items from the cookie
             List<string> items = new List<string>();
@@ -166,30 +179,26 @@ namespace MasterPiece.Controllers
             {
                 items = new List<string>(Request.Cookies["cart"].Value.Split('|'));
             }
-            if (items.Count > 0) 
-            { 
-                int productid =Convert.ToInt32(items[0]);
-                int productCheck =Convert.ToInt32(db.Products.Where(x => x.Product_id == productid).FirstOrDefault().Store_id);
-                int newproductstore = Convert.ToInt32(db.Products.Where(x => x.Product_id == id).FirstOrDefault().Store_id);
-                if (newproductstore != productCheck)
-                {
-                    TempData["swal_message"] = $"You can NOT choose items from more than one store";
-                    ViewBag.title = "Error";
-                    ViewBag.icon = "error";
-                    return Redirect(returnUrl);
-                }
-                bool deletedCheck =Convert.ToBoolean(db.Products.Where(x => x.Product_id == id).FirstOrDefault().isDeleted);
-                if (deletedCheck) 
-                {
-                    TempData["swal_message"] = $"This Products has been deleted";
-                    ViewBag.title = "Error";
-                    ViewBag.icon = "error";
-                    return Redirect(returnUrl);
 
+            // check if the item is already in the cart
+            bool itemFound = false;
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].StartsWith(id.ToString() + "_"))
+                {
+                    // update the existing item's quantity
+                    int quantity = Convert.ToInt32(items[i].Split('_')[1]) + 1;
+                    items[i] = id.ToString() + "_" + quantity.ToString();
+                    itemFound = true;
+                    break;
                 }
             }
-            // add the new item to the cart
-            items.Add(id.ToString());
+
+            if (!itemFound)
+            {
+                // add the new item to the cart with a quantity of 1
+                items.Add(id.ToString() + "_1");
+            }
 
             // update the cart cookie with the new items
             cart.Value = string.Join("|", items);
@@ -201,10 +210,6 @@ namespace MasterPiece.Controllers
         }
         public ActionResult RemoveItem(int id)
         {
-            // remove the selected item from the shopping cart
-            // ...
-
-            // create a new cart cookie
             HttpCookie cart = new HttpCookie("cart");
 
             // read the existing cart items from the cookie
@@ -215,7 +220,7 @@ namespace MasterPiece.Controllers
             }
 
             // remove the item from the cart
-            items.Remove(id.ToString());
+            items.RemoveAll(x => x.Split('_')[0] == id.ToString());
 
             // update the cart cookie with the new items or delete it if no items left
             if (items.Count > 0)
@@ -229,7 +234,6 @@ namespace MasterPiece.Controllers
                 cart.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(cart);
             }
-
 
             // redirect back to the shopping cart view
             return RedirectToAction("Cart");
