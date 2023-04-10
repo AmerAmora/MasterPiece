@@ -128,8 +128,7 @@ namespace MasterPiece.Controllers
         {
             HttpCookie cart = Request.Cookies["cart"];
             List<Product> allProducts = new List<Product>();
-            int cartQuantity = 0; // initialize cart quantity variable
-            dynamic UserProducts = new List<Product>();
+            dynamic UserProducts = new Product();
 
             if (cart != null)
             {
@@ -145,8 +144,7 @@ namespace MasterPiece.Controllers
                     // set the quantity for each product
                     foreach (var product in itemProducts)
                     {
-                        product.Quantity = quantity;
-                        cartQuantity += quantity; // increment cart quantity
+                        product.QuantityInCart = quantity;
                     }
 
                     allProducts.AddRange(itemProducts);
@@ -161,11 +159,6 @@ namespace MasterPiece.Controllers
                 return View(model);
             }
 
-            // pass cart quantity to the view
-            ViewBag.CartQuantity = cartQuantity;
-            // or you can add it as a property of the model:
-            // ViewBag.UserProducts = UserProducts;
-            // ViewBag.CartQuantity = cartQuantity;
             return View(UserProducts);
         }
         public ActionResult AddItem(int id, string returnUrl)

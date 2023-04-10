@@ -31,7 +31,9 @@ namespace MasterPiece.Models
         public Nullable<int> Category_id { get; set; }
         public Nullable<bool> isDeleted { get; set; }
         public Nullable<bool> isFeatured { get; set; }
-    
+        public virtual int QuantityInCart { get; set; } 
+
+
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }

@@ -46,7 +46,7 @@
                                         <td class="product-image"><img src="../../ProductImage/@item.Product_Image" style="height: 60px; width: 60px;" alt=""></td>
                                         <td class="product-name">@item.Product_Name</td>
                                         <td class="product-price">@item.Product_Price JD</td>
-                                        <td class="product-quantity"><input type="number" placeholder="1"></td>
+                                        <td class="product-quantity"><input type="number" value="@item.QuantityInCart" placeholder="@item.QuantityInCart"></td>
                                         <td class="product-total">1</td>
                                     </tr>
                                     totalprice = totalprice + Convert.ToDouble(item.Product_Price);
