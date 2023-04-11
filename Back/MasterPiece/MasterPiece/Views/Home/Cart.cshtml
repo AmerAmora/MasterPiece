@@ -29,7 +29,7 @@
                                 <th class="product-remove"></th>
                                 <th class="product-image">Product Image</th>
                                 <th class="product-name">Name</th>
-                                <th class="product-price">Price</th>
+                                <th class="product-price">Unit Price</th>
                                 <th class="product-quantity">Quantity</th>
                                 <th class="product-total">Total</th>
                             </tr>
@@ -37,20 +37,27 @@
                         <tbody>
                             @{double totalprice = 0; }
 
-                                @foreach (var item in Model)
-                                {
+                            @foreach (var item in Model)
+                            {
 
 
-                                    <tr class="table-body-row">
-                                        <td class="product-remove"><a href="RemoveItem/@item.Product_id"><i class="far fa-window-close"></i></a></td>
-                                        <td class="product-image"><img src="../../ProductImage/@item.Product_Image" style="height: 60px; width: 60px;" alt=""></td>
-                                        <td class="product-name">@item.Product_Name</td>
-                                        <td class="product-price">@item.Product_Price JD</td>
-                                        <td class="product-quantity"><input type="number" value="@item.QuantityInCart" placeholder="@item.QuantityInCart"></td>
-                                        <td class="product-total">1</td>
-                                    </tr>
-                                    totalprice = totalprice + Convert.ToDouble(item.Product_Price);
-                                }
+                                <tr class="table-body-row">
+                                    <td class="product-remove"><a href="RemoveItem/@item.Product_id"><i class="far fa-window-close"></i></a></td>
+                                    <td class="product-image"><img src="../../ProductImage/@item.Product_Image" style="height: 60px; width: 60px;" alt=""></td>
+                                    <td class="product-name">@item.Product_Name</td>
+                                    <td class="product-price">@item.Product_Price JD</td>
+                                    <td class="product-quantity">
+                                        <button class="quantity-btn minus" data-product-id="@item.Product_id" data-cart-quantity="@item.CartQuantity">-</button>
+                                        <span type="number" class="quantity" placeholder="@item.CartQuantity">
+                                            @item.CartQuantity
+                                        </span>
+                                        <button class="quantity-btn plus" data-product-id="@item.Product_id" data-cart-quantity="@item.CartQuantity">+</button>
+
+                                    </td>
+                                    <td class="product-total">@(item.Product_Price * @item.CartQuantity)</td>
+                                </tr>
+                                totalprice = totalprice + Convert.ToDouble(item.Product_Price);
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -66,122 +73,125 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
-                                @{double finalprice = totalprice; }
-                                <tr class="total-data">
-                                    <td><strong>Subtotal: </strong></td>
-                                    <td>@totalprice JD</td>
-                                </tr>
-                                    @if (totalprice >= 100)
-                                    {
+
+                            @{double finalprice = totalprice; }
+                            <tr class="total-data">
+                                <td><strong>Subtotal: </strong></td>
+                                <td>@totalprice JD</td>
+                            </tr>
+                            @if (totalprice >= 100)
+                            {
 
 
-                                        <tr class="total-data">
-                                            <td><strong>Shipping: </strong></td>
-                                            <td>0</td>
-                                        </tr>
-                                    }
-                                    else
-                                    {
-                                        finalprice = totalprice + 15;
-                                        <tr class="total-data">
-                                            <td><strong>Shipping: </strong></td>
-                                            <td>15JD</td>
-                                        </tr>
-                                    }
-                                
                                 <tr class="total-data">
-                                    <td><strong>Total: </strong></td>
-                                    <td>@finalprice JD</td>
+                                    <td><strong>Shipping: </strong></td>
+                                    <td>0</td>
                                 </tr>
-                                
-                            </tbody>
+                            }
+                            else
+                            {
+                                finalprice = totalprice + 15;
+                                <tr class="total-data">
+                                    <td><strong>Shipping: </strong></td>
+                                    <td>15JD</td>
+                                </tr>
+                            }
+
+                            <tr class="total-data">
+                                <td><strong>Total: </strong></td>
+                                <td>@finalprice JD</td>
+                            </tr>
+
+                        </tbody>
                     </table>
-                    @if (Model.Count() > 0) { 
-                    <div class="cart-buttons">
-                        <a href="@Url.Action("CheckOut","Home","")" class="boxed-btn black" style="float:right">Check Out</a>
-                    </div>}
+                    @if (Model.Count() > 0)
+                    {
+                        <div class="cart-buttons">
+                            <a href="@Url.Action("CheckOut","Home","")" class="boxed-btn black" style="float:right">Check Out</a>
+                        </div>}
                 </div>
 
-               
+
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-function increaseQuantity(productId) {
-    // get the current cart cookie value
-    var cartCookie = getCookie("cart");
+    $(function () {
+        // handle the "+" and "-" button clicks
+        $('.quantity-btn').on('click', function () {
+            var $btn = $(this);
+            var productId = $btn.data('product-id');
+            var cartQuantity = $btn.data('cart-quantity');
 
-    // split the cookie value into an array of "productId:quantity" pairs
-    var cartItems = cartCookie ? cartCookie.split(",") : [];
-
-    // find the item in the cart with the matching product ID
-    var found = false;
-    for (var i = 0; i < cartItems.length; i++) {
-        var parts = cartItems[i].split(":");
-        if (parts[0] == productId) {
-            found = true;
-            parts[1]++;
-            cartItems[i] = parts.join(":");
-            break;
-        }
-    }
-
-    // if the item wasn't found, add it to the cart with a quantity of 1
-    if (!found) {
-        cartItems.push(productId + ":1");
-    }
-
-    // set the new cookie value and refresh the page
-    setCookie("cart", cartItems.join(","), 7);
-    location.reload();
-}
-
-function decreaseQuantity(productId) {
-    // get the current cart cookie value
-    var cartCookie = getCookie("cart");
-
-    // split the cookie value into an array of "productId:quantity" pairs
-    var cartItems = cartCookie ? cartCookie.split(",") : [];
-
-    // find the item in the cart with the matching product ID
-    var found = false;
-    for (var i = 0; i < cartItems.length; i++) {
-        var parts = cartItems[i].split(":");
-        if (parts[0] == productId) {
-            found = true;
-            if (parts[1] > 1) {
-                parts[1]--;
-                cartItems[i] = parts.join(":");
+            if ($btn.hasClass('plus')) {
+                cartQuantity++;
             } else {
-                cartItems.splice(i, 1);
+                cartQuantity--;
             }
-            break;
+
+            // send an AJAX request to update the cart quantity
+            $.ajax({
+                url: '/Home/Cart',
+                type: 'POST',
+                data: { productId: productId, cartQuantity: cartQuantity },
+                success: function (data) {
+                    // update the quantity displayed in the cart view
+                    $btn.siblings('.quantity').text(data.cartQuantity);
+
+                    $btn.data('cart-quantity', data.cartQuantity);
+                },
+                error: function () {
+                    alert('An error occurred while updating the cart quantity.');
+                }
+            });
+            // update the cookie with the new quantity
+            var cart = getCookie('cart');
+            if (cart) {
+                var items = cart.split('|');
+                var newItems = [];
+
+                for (var i = 0; i < items.length; i++) {
+                    var id = items[i].split('_')[0];
+                    var quantity = items[i].split('_')[1];
+
+                    if (id == productId) {
+                        quantity = cartQuantity;
+                    }
+
+                    newItems.push(id + '_' + quantity);
+                }
+
+                // set the updated cookie
+                setCookie('cart', newItems.join('|'), 7);
+            }
+
+            // update the quantity displayed in the cart view
+            $btn.siblings('.quantity').text(cartQuantity);
+            $btn.data('cart-quantity', cartQuantity);
+        });
+
+        // helper functions to get and set cookies
+        function getCookie(name) {
+            var value = '; ' + document.cookie;
+            var parts = value.split('; ' + name + '=');
+            if (parts.length == 2) {
+                return parts.pop().split(';').shift();
+            }
         }
-    }
 
-    // set the new cookie value and refresh the page
-    setCookie("cart", cartItems.join(","), 7);
-    location.reload();
-}
+        function setCookie(name, value, days) {
+            var expires = '';
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toGMTString();
+            }
+            document.cookie = name + '=' + value + expires + '; path=/';
+        }
+    });
 
-// helper function to get a cookie value by name
-function getCookie(name) {
-    var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-    if (match) {
-        return match[2];
-    }
-}
 
-// helper function to set a cookie value
-function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + value + expires + "; path=/";
-}
 </script>

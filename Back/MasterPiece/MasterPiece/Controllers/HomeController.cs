@@ -144,7 +144,7 @@ namespace MasterPiece.Controllers
                     // set the quantity for each product
                     foreach (var product in itemProducts)
                     {
-                        product.QuantityInCart = quantity;
+                        product.CartQuantity = quantity;
                     }
 
                     allProducts.AddRange(itemProducts);
@@ -245,6 +245,40 @@ namespace MasterPiece.Controllers
             return Redirect(Request.UrlReferrer.ToString());
 
         }
+        [HttpPost]
+        public ActionResult Cart(int productId, int cartQuantity)
+        {
+            HttpCookie cart = Request.Cookies["cart"];
+
+            if (cart != null)
+            {
+                // read the cart items from the cookie
+                List<string> items = new List<string>(cart.Value.Split('|'));
+                var newItems = new List<string>();
+
+                // update the quantity for the selected product
+                foreach (var item in items)
+                {
+                    int id = Convert.ToInt32(item.Split('_')[0]);
+                    int quantity = Convert.ToInt32(item.Split('_')[1]);
+
+                    if (id == productId)
+                    {
+                        quantity = cartQuantity;
+                    }
+
+                    newItems.Add(id + "_" + quantity);
+                }
+
+                // set the updated cookie
+                cart.Value = string.Join("|", newItems);
+                Response.SetCookie(cart);
+            }
+
+            // return the updated cart quantity in JSON format
+            return Json(new { cartQuantity = cartQuantity });
+        }
+
         public ActionResult Contact()
         {
 
