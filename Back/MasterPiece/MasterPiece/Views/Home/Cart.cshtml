@@ -31,33 +31,45 @@
                                 <th class="product-name">Name</th>
                                 <th class="product-price">Unit Price</th>
                                 <th class="product-quantity">Quantity</th>
-                                <th class="product-total">Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{double totalprice = 0; }
-
                             @foreach (var item in Model)
                             {
+                                var productId = item.Product_id;
+                                var cartCookie = Request.Cookies["cart"].Value;
+                                var quantity = 0;
 
+                                if (cartCookie !=null)
+                                {
+                                    var cartItems = cartCookie.Split('|');
+                                    for (var i = 0; i < cartItems.Length; i++)
+                                    {
+                                        var cartItem = cartItems[i].Split('_');
+                                        if (Convert.ToInt32(cartItem[0]) == productId)
+                                        {
+                                            quantity = Convert.ToInt32(cartItem[1]);
+                                            break;
+                                        }
+                                    }
+                                }
 
+                                var minusBtnDisabled = quantity <= 1 ? "disabled" : "";
                                 <tr class="table-body-row">
                                     <td class="product-remove"><a href="RemoveItem/@item.Product_id"><i class="far fa-window-close"></i></a></td>
                                     <td class="product-image"><img src="../../ProductImage/@item.Product_Image" style="height: 60px; width: 60px;" alt=""></td>
                                     <td class="product-name">@item.Product_Name</td>
-                                    <td class="product-price">@item.Product_Price JD</td>
+                                    <td class="product-price"><span id="price-@item.Product_id">@item.Product_Price</span> JD</td>
                                     <td class="product-quantity">
-                                        <button class="quantity-btn minus" data-product-id="@item.Product_id" data-cart-quantity="@item.CartQuantity">-</button>
-                                        <span type="number" class="quantity" placeholder="@item.CartQuantity">
-                                            @item.CartQuantity
-                                        </span>
-                                        <button class="quantity-btn plus" data-product-id="@item.Product_id" data-cart-quantity="@item.CartQuantity">+</button>
-
+                                        <button class="quantity-btn minus" data-product-id="@item.Product_id" data-cart-quantity="@quantity" @minusBtnDisabled>-</button>
+                                        <span type="number" class="quantity" id="quantity-@item.Product_id" data-product-id="@item.Product_id" data-cart-quantity="@quantity">@quantity</span>
+                                        <button class="quantity-btn plus" data-product-id="@item.Product_id" data-cart-quantity="@quantity">+</button>
                                     </td>
-                                    <td class="product-total">@(item.Product_Price * @item.CartQuantity)</td>
                                 </tr>
-                                totalprice = totalprice + Convert.ToDouble(item.Product_Price);
+                                totalprice = totalprice + Convert.ToDouble(item.Product_Price)*quantity;
                             }
+
                         </tbody>
                     </table>
                 </div>
@@ -77,7 +89,7 @@
                             @{double finalprice = totalprice; }
                             <tr class="total-data">
                                 <td><strong>Subtotal: </strong></td>
-                                <td>@totalprice JD</td>
+                                <td id="sub-total">@finalprice JD</td>
                             </tr>
                             @if (totalprice >= 100)
                             {
@@ -90,7 +102,7 @@
                             }
                             else
                             {
-                                finalprice = totalprice + 15;
+                                finalprice = finalprice + 15;
                                 <tr class="total-data">
                                     <td><strong>Shipping: </strong></td>
                                     <td>15JD</td>
@@ -99,7 +111,7 @@
 
                             <tr class="total-data">
                                 <td><strong>Total: </strong></td>
-                                <td>@finalprice JD</td>
+                                <td id="total-price">@finalprice JD</td>
                             </tr>
 
                         </tbody>
@@ -118,80 +130,188 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    $(function () {
-        // handle the "+" and "-" button clicks
-        $('.quantity-btn').on('click', function () {
-            var $btn = $(this);
-            var productId = $btn.data('product-id');
-            var cartQuantity = $btn.data('cart-quantity');
-
-            if ($btn.hasClass('plus')) {
-                cartQuantity++;
-            } else {
-                cartQuantity--;
-            }
-
-            // send an AJAX request to update the cart quantity
-            $.ajax({
-                url: '/Home/Cart',
-                type: 'POST',
-                data: { productId: productId, cartQuantity: cartQuantity },
-                success: function (data) {
-                    // update the quantity displayed in the cart view
-                    $btn.siblings('.quantity').text(data.cartQuantity);
-
-                    $btn.data('cart-quantity', data.cartQuantity);
-                },
-                error: function () {
-                    alert('An error occurred while updating the cart quantity.');
-                }
-            });
-            // update the cookie with the new quantity
-            var cart = getCookie('cart');
-            if (cart) {
-                var items = cart.split('|');
-                var newItems = [];
-
-                for (var i = 0; i < items.length; i++) {
-                    var id = items[i].split('_')[0];
-                    var quantity = items[i].split('_')[1];
-
-                    if (id == productId) {
-                        quantity = cartQuantity;
+@*<script>
+        $(function () {
+            // handle the "+" and "-" button clicks
+            $('.quantity-btn').on('click', function () {
+                var $btn = $(this);
+                var productId = $btn.data('product-id');
+                var cartQuantity = parseInt($btn.data('cart-quantity'));
+                if ($btn.hasClass('plus')) {
+                    cartQuantity++;
+                } else {
+                    cartQuantity--;
+                    if (cartQuantity < 1) {
+                        cartQuantity = 1;
+                        return; // exit the function if cart quantity is less than 1
                     }
-
-                    newItems.push(id + '_' + quantity);
                 }
-
-                // set the updated cookie
-                setCookie('cart', newItems.join('|'), 7);
+                // send an AJAX request to update the cart quantity
+                $.ajax({
+                    url: '/Home/UpdateCartQuantity',
+                    type: 'POST',
+                    data: { productId: productId, cartQuantity: cartQuantity },
+                    success: function (data) {
+                        // update the quantity displayed in the cart view
+                        $btn.siblings('.quantity').text(data.cartQuantity);
+                        $btn.data('cart-quantity', data.cartQuantity);
+                    },
+                    error: function () {
+                        alert('An error occurred while updating the cart quantity.');
+                    }
+                });
+                // update the cookie with the new quantity
+                var cart = getCookie('cart');
+                if (cart) {
+                    var items = cart.split('|');
+                    var newItems = [];
+                    for (var i = 0; i < items.length; i++) {
+                        var id = items[i].split('_')[0];
+                        var quantity = items[i].split('_')[1];
+                        if (id == productId) {
+                            quantity = cartQuantity;
+                        }
+                        newItems.push(id + '_' + quantity);
+                    }
+                    // set the updated cookie
+                    setCookie('cart', newItems.join('|'), 7);
+                }
+                // update the quantity displayed in the cart view
+                $btn.siblings('.quantity').text(cartQuantity);
+                $btn.data('cart-quantity', cartQuantity);
+            });
+            // helper functions to get and set cookies
+            function getCookie(name) {
+                var value = '; ' + document.cookie;
+                var parts = value.split('; ' + name + '=');
+                if (parts.length == 2) {
+                    return parts.pop().split(';').shift();
+                }
             }
 
-            // update the quantity displayed in the cart view
-            $btn.siblings('.quantity').text(cartQuantity);
-            $btn.data('cart-quantity', cartQuantity);
+            function setCookie(name, value, days) {
+                var expires = '';
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = '; expires=' + date.toGMTString();
+                }
+                document.cookie = name + '=' + value + expires + '; path=/';
+            }
         });
 
-        // helper functions to get and set cookies
-        function getCookie(name) {
-            var value = '; ' + document.cookie;
-            var parts = value.split('; ' + name + '=');
-            if (parts.length == 2) {
-                return parts.pop().split(';').shift();
+    </script>*@
+<script>
+    // Access the cookie data and parse the quantities for each product
+    const cookieData = document.cookie;
+    const cookieItems = cookieData.split('; ');
+    const productQuantities = {};
+
+    for (let i = 0; i < cookieItems.length; i++) {
+        const itemParts = cookieItems[i].split('=');
+        if (itemParts[0] === 'cart') {
+            const productData = itemParts[1].split('|');
+            for (let j = 0; j < productData.length; j++) {
+                const productParts = productData[j].split('_');
+                if (productParts.length === 2) {
+                    const productId = productParts[0];
+                    const quantity = parseInt(productParts[1]);
+                    productQuantities[productId] = quantity;
+                }
+            }
+            break;
+        }
+    }
+
+    // Add event listeners to the plus and minus buttons
+    var plusButtons = document.querySelectorAll('.plus');
+    var minusButtons = document.querySelectorAll('.minus');
+
+    for (var i = 0; i < plusButtons.length; i++) {
+        plusButtons[i].addEventListener('click', function () {
+            var productId = this.getAttribute('data-product-id');
+            var cartCookie = getCartCookie();
+            var cartItems = cartCookie.split('|');
+            for (var i = 0; i < cartItems.length; i++) {
+                var item = cartItems[i].split('_');
+                if (item[0] === productId) {
+                    var currentQuantity = parseInt(item[1]);
+                    var newQuantity = currentQuantity + 1;
+                    item[1] = newQuantity.toString();
+                    cartItems[i] = item.join('_');
+                    break;
+                }
+            }
+            cartCookie = cartItems.join('|');
+            setCartCookie(cartCookie);
+            updateQuantityDisplay(productId, newQuantity);
+            updateTotalPrice();
+        });
+    }
+
+    for (var i = 0; i < minusButtons.length; i++) {
+        minusButtons[i].addEventListener('click', function () {
+            var productId = this.getAttribute('data-product-id');
+            var cartCookie = getCartCookie();
+            var cartItems = cartCookie.split('|');
+            for (var i = 0; i < cartItems.length; i++) {
+                var item = cartItems[i].split('_');
+                if (item[0] === productId) {
+                    var currentQuantity = parseInt(item[1]);
+                    if (currentQuantity > 1) {
+                        var newQuantity = currentQuantity - 1;
+                        item[1] = newQuantity.toString();
+                        cartItems[i] = item.join('_');
+                        cartCookie = cartItems.join('|');
+                        setCartCookie(cartCookie);
+                        updateQuantityDisplay(productId, newQuantity);
+                        updateTotalPrice();
+                    }
+                    break;
+                }
+            }
+        });
+    }
+
+    function updateQuantityDisplay(productId, quantity) {
+        var quantitySpan = document.getElementById('quantity-' + productId);
+        if (quantitySpan) {
+            quantitySpan.innerHTML = quantity.toString();
+            quantitySpan.setAttribute('data-cart-quantity', quantity.toString());
+        }
+    }
+    function updateTotalPrice() {
+        var total = 0;
+        var cartCookie = document.cookie.match(/cart=([^;]*)/);
+        console.log(cartCookie);
+        if (cartCookie !== null) {
+            var cartItems = cartCookie[1].split('|');
+            console.log(cartItems);
+            for (var i = 0; i < cartItems.length; i++) {
+                var item = cartItems[i].split('_');
+                var itemId = item[0];
+                var itemQuantity = parseInt(item[1]);
+                var quantityInput = document.getElementById('quantity-' + itemId);
+                var priceElement = document.getElementById('price-' + itemId);
+                var price = parseFloat(priceElement.textContent);
+                total += itemQuantity * price;
+                console.log(total);
+                quantityInput.textContent = itemQuantity;
             }
         }
 
-        function setCookie(name, value, days) {
-            var expires = '';
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = '; expires=' + date.toGMTString();
-            }
-            document.cookie = name + '=' + value + expires + '; path=/';
-        }
-    });
+        document.getElementById('total-price').textContent = total.toFixed(2);
+        document.getElementById('sub-total').textContent = total.toFixed(2);
 
+    }
+    function getCartCookie() {
+        return document.cookie.replace(/(?:(?:^|.*;\s*)cart\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    }
+
+    function setCartCookie(value) {
+        var now = new Date();
+        var expiration = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+        document.cookie = 'cart=' + value + ';expires=' + expiration.toUTCString() + ';path=/';
+    }
 
 </script>

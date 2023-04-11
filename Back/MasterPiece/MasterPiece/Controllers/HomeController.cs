@@ -142,11 +142,7 @@ namespace MasterPiece.Controllers
                     List<Product> itemProducts = db.Products.Where(x => x.Product_id == id).ToList();
 
                     // set the quantity for each product
-                    foreach (var product in itemProducts)
-                    {
-                        product.CartQuantity = quantity;
-                    }
-
+                   
                     allProducts.AddRange(itemProducts);
                 }
 
@@ -246,7 +242,7 @@ namespace MasterPiece.Controllers
 
         }
         [HttpPost]
-        public ActionResult Cart(int productId, int cartQuantity)
+        public ActionResult UpdateCartQuantity(int productId, int cartQuantity)
         {
             HttpCookie cart = Request.Cookies["cart"];
 
@@ -276,7 +272,7 @@ namespace MasterPiece.Controllers
             }
 
             // return the updated cart quantity in JSON format
-            return Json(new { cartQuantity = cartQuantity });
+            return RedirectToAction("Cart");
         }
 
         public ActionResult Contact()
