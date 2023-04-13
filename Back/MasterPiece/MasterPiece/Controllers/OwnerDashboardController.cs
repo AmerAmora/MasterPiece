@@ -145,9 +145,9 @@ namespace MasterPiece.Controllers
                 ViewBag.todaySales = 0;
             else
                 ViewBag.todaySales = totalSales;
-            ViewBag.todaysRevenue = ViewBag.todaySales * 10 / 100;
+            ViewBag.todaysRevenue = ViewBag.todaySales * 90 / 100;
 
-            ViewBag.totalRevenue = ViewBag.totalSales * 10 / 100;
+            ViewBag.totalRevenue = ViewBag.totalSales * 90 / 100;
 
 
             return View();
