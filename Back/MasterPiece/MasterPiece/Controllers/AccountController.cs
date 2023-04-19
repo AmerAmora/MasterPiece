@@ -56,6 +56,11 @@ namespace MasterPiece.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                // If the user is already authenticated, redirect to the dashboard
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -73,6 +78,7 @@ namespace MasterPiece.Controllers
                 return View(model);
             }
 
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -87,7 +93,12 @@ namespace MasterPiece.Controllers
                         return RedirectToLocal(returnUrl);
 
                     }
-                    else if (rolecheck == "1") { return RedirectToAction("Index", "Products", ""); }
+                    else if (rolecheck == "1") {
+                        AspNetUser Admin = db.AspNetUsers.Find(userID);
+                        Session["LoggedAdmin"] = Admin;
+
+                        return RedirectToAction("Index", "Adminstat", ""); 
+                    }
 
                     Store loggedstore = db.Stores.Where(x => x.userId == userID).Select(store => store).FirstOrDefault();
                     if (loggedstore.isAccepted == true ) 
@@ -182,6 +193,11 @@ namespace MasterPiece.Controllers
 
         public ActionResult ShopRegister()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                // If the user is already authenticated, redirect to the dashboard
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
@@ -189,6 +205,8 @@ namespace MasterPiece.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ShopRegister(RegisterViewModel model, string owerName, string storeName, string Phone, HttpPostedFileBase Store_Image, HttpPostedFileBase Commercial_Record)
         {
+
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -235,6 +253,11 @@ namespace MasterPiece.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                // If the user is already authenticated, redirect to the dashboard
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
      

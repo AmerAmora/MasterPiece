@@ -24,6 +24,13 @@
         width: 120px !important;
     }
 </style>
+@section search
+    {
+    @using (Html.BeginForm("Search", "Products", "", FormMethod.Post, new { @class = "d-none d-md-flex ms-4" }))
+    {
+        <input class="form-control bg-dark border-0" type="search" placeholder="Search By Product Name" name="SearchItem" style="width:225px">
+    }
+}
 <div style="text-align:center">
     <h2>Products</h2>
 </div>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -72,6 +73,11 @@
 
                                     </li>
                                 }
+                                @if (Request.IsAuthenticated) {
+                                <li>
+                                    @Html.ActionLink("Profile", "Profile", "Home")
+                                </li>
+                                }
                                 <li>
                                     @Html.Partial("_LoginPartial")
                                 </li>
@@ -101,8 +107,10 @@
                     <div class="search-bar">
                         <div class="search-bar-tablecell">
                             <h3>Search For:</h3>
-                            <input type="text" placeholder="Keywords">
+                            @using (Html.BeginForm("Search","Home")) {
+                            <input type="text" placeholder="Keywords" name="item">
                             <button type="submit">Search <i class="fas fa-search"></i></button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -116,16 +124,16 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-box about-widget">
                         <h2 class="widget-title">About us</h2>
-                        <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                        <p>We sell original PC accessories to enhance your computing experience. Shop with confidence knowing that we only source from trusted manufacturers. Satisfaction guaranteed.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-box get-in-touch">
                         <h2 class="widget-title">Get in Touch</h2>
                         <ul>
-                            <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                            <li>support@fruitkha.com</li>
-                            <li>+00 111 222 3333</li>
+                            <li>HR3X+2VM، ش. الشيخ خليل، إربد</li>
+                            <li>Amer.M.Amora@gmail.com</li>
+                            <li>+062 789949499 </li>
                         </ul>
                     </div>
                 </div>
@@ -133,11 +141,11 @@
                     <div class="footer-box pages">
                         <h2 class="widget-title">Pages</h2>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="services.html">Shop</a></li>
-                            <li><a href="news.html">News</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li><a href="@Url.Action("About","Home")">About</a></li>
+                            <li><a href="@Url.Action("Products","Home")">Shop</a></li>
+                            <li><a href="@Url.Action("Testimonial","Home")">Send Your Testimonial</a></li>
+                            <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
                         </ul>
                     </div>
                 </div>

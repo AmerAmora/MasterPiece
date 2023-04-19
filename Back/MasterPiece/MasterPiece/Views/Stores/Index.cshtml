@@ -19,16 +19,23 @@
         .thumbnail:hover {
             transform: scale(3);
         }
+
     th {
-        text-align:center;
-    }
-    td {
-    text-align:center;
+        text-align: center;
     }
 
+    td {
+        text-align: center;
+    }
 </style>
 
-
+@section search
+    {
+    @using (Html.BeginForm("Search", "Stores", "", FormMethod.Post, new { @class = "d-none d-md-flex ms-4" }))
+    {
+        <input class="form-control bg-dark border-0" type="search" placeholder="Search By Name" name="SearchItem">
+    }
+}
 <div style="text-align:center">
     <h2>Stores</h2>
 </div>
@@ -82,7 +89,7 @@
                                         @Html.DisplayFor(modelItem => item.Owner_Name)
                                     </td>
                                     <td>
-                                        <img src="../../Images/@item.Store_Image" class="thumbnail" style="width:50px; height:50px; "/>
+                                        <img src="../../Images/@item.Store_Image" class="thumbnail" style="width:50px; height:50px; " />
                                     </td>
                                     <td> <a href="~/Commercial_Recordes/@item.Commercial_Record" download style="text-decoration-line:underline">Record </a> </td>
                                     <td>
@@ -118,7 +125,7 @@
                                     }
                                     else if (item.isAccepted == true && item.isBlocked == true)
                                     {
-                                         @Html.ActionLink("UnBlock", "UnBlock", new { id = item.Store_id }, new { @class = "btn btn-danger" })
+                                        @Html.ActionLink("UnBlock", "UnBlock", new { id = item.Store_id }, new { @class = "btn btn-danger" })
 
                                     }
 

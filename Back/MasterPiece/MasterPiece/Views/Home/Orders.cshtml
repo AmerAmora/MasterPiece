@@ -1,0 +1,68 @@
+﻿@model IEnumerable<MasterPiece.Models.Order>
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Orders</title>
+    <style>
+      
+
+        h1 {
+            color: #861523;
+            text-align: center;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 50px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #861523;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb-section breadcrumb-bg" style="background-image: url(../assets/img/ProfileBackGround.jpg);">
+        <div class="Profilecontainer">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="breadcrumb-text">
+                        <p>Check Your Orders</p>
+                        <h1>User Orders</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Order Details</th>
+        </tr>
+        @foreach(var item in Model) {
+        <tr>
+            <td>@item.Order_id</td>
+            <td>@item.Order_Date</td>
+            <td><a href="@Url.Action("OrderDetails", "Home", new {id=item.Order_id })">View Details</a></td>
+        </tr>
+        
+        }
+    </table>
+</body>
+</html>
+

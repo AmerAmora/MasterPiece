@@ -8,6 +8,8 @@ using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
+
     public class StoresController : Controller
     {
         private MasterPieceEntities db = new MasterPieceEntities();
@@ -16,6 +18,11 @@ namespace MasterPiece.Controllers
         public async Task<ActionResult> Index()
         {
             return View(await db.Stores.ToListAsync());
+        }
+        [HttpPost]
+        public async Task<ActionResult> Search(string SearchItem)
+        {
+            return View("Index", await db.Stores.Where(x => x.Store_Name.Contains(SearchItem)).ToListAsync());
         }
 
         // GET: Stores/Details/5

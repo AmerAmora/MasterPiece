@@ -8,6 +8,8 @@ using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
+
     public class AspNetUsersController : Controller
     {
         private MasterPieceEntities db = new MasterPieceEntities();
@@ -21,6 +23,16 @@ namespace MasterPiece.Controllers
                         where AspNetUserRole.RoleId == "2"
                         select AspNetUser;
             return View(await query.ToListAsync());
+        }
+        [HttpPost]
+        public async Task<ActionResult> Search(string SearchItem)
+        {
+            var query = from AspNetUser in db.AspNetUsers
+                        join AspNetUserRole in db.AspNetUserRoles
+                        on AspNetUser.Id equals AspNetUserRole.UserId
+                        where AspNetUserRole.RoleId == "2"&&AspNetUser.Email.Contains(SearchItem)
+                        select AspNetUser;
+            return View("Index",await query.ToListAsync());
         }
 
         // GET: AspNetUsers/Details/5

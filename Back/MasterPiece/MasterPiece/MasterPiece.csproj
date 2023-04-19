@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="Controllers\testimonialsController.cs" />
+    <Compile Include="CustomAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,6 +318,7 @@
     <Content Include="assets\img\avaters\avatar2.png" />
     <Content Include="assets\img\avaters\avatar3.png" />
     <Content Include="assets\img\breadcrumb-bg.jpg" />
+    <Content Include="assets\img\ProfileBackGround.jpg" />
     <Content Include="assets\img\CategoriesBG.png" />
     <Content Include="assets\img\CheckOutBG.jpg" />
     <Content Include="assets\img\company-logos\1.png" />
@@ -752,6 +754,9 @@
     <Content Include="Views\OwnerDashboard\StoreSales.cshtml" />
     <Content Include="Views\OwnerDashboard\Profile.cshtml" />
     <Content Include="Views\Home\Testimonial.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\Orders.cshtml" />
+    <Content Include="Views\Home\OrderDetails.cshtml" />
     <None Include="Views\Shared\NoAccess.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

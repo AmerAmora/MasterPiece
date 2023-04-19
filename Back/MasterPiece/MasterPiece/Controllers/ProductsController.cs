@@ -7,6 +7,8 @@ using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
+
     public class ProductsController : Controller
     {
         private MasterPieceEntities db = new MasterPieceEntities();
@@ -16,6 +18,11 @@ namespace MasterPiece.Controllers
         {
             var products = db.Products.Where(x=>x.isDeleted !=true).Include(p => p.Category).Include(p => p.Store);
             return View(await products.ToListAsync());
+        }
+        [HttpPost]
+        public async Task<ActionResult> Search(string SearchItem)
+        {
+            return View("Index", await db.Products.Where(x => x.isDeleted != true && x.Product_Name.Contains(SearchItem)).Include(p => p.Category).Include(p => p.Store).ToListAsync());
         }
 
         // GET: Products/Details/5

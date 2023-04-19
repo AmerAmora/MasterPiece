@@ -44,6 +44,7 @@ namespace MasterPiece.Controllers
         public ActionResult CheckOut()
         {
             string userid = User.Identity.GetUserId();
+            AspNetUser user = db.AspNetUsers.Find(userid);
             HttpCookie cart = Request.Cookies["cart"];
             List<Product> allProducts = new List<Product>();
             if (cart != null)
@@ -70,7 +71,7 @@ namespace MasterPiece.Controllers
                 ViewBag.TotalPrice = totalprice;
 
             }
-            return View();
+            return View(user);
 
         }
         public ActionResult CheckOutItems() 
@@ -356,8 +357,52 @@ namespace MasterPiece.Controllers
             db.SaveChanges();
             return View();
         }
+        [Authorize(Roles = "User")]
 
+        public ActionResult Profile() 
+        {
+            string userId = User.Identity.GetUserId();
+            AspNetUser loggedUser = db.AspNetUsers.Find(userId);
+            return View(loggedUser);
+        }
+        [HttpPost]
+        public ActionResult Profile(string email,string phone,string first_name,string street_address, string last_name,string zip_code,string city)
+        {
 
+            string userId = User.Identity.GetUserId();
+            AspNetUser loggedUser = db.AspNetUsers.Find(userId);
+            loggedUser.Email = email;
+            loggedUser.city = city;
+            loggedUser.StreetAddress = street_address;
+            loggedUser.PhoneNumber = phone;
+            loggedUser.ZipCode = zip_code;
+            loggedUser.first_Name = first_name;
+            loggedUser.last_Name = last_name;
+            loggedUser.UserName = email;
+            db.SaveChanges();
+            return View(loggedUser);
+        }
 
+        public ActionResult Orders() 
+        {
+            string userId = User.Identity.GetUserId();
+            var orders = db.Orders.Where(x => x.userId == userId).ToList();
+
+            return View(orders);
+        }
+        public ActionResult OrderDetails(string id) 
+        {
+            var order = db.Order_Details.Where(x => x.Order_id == id).ToList();
+
+            return View(order);
+        }
+
+        public ActionResult Search(string item) 
+        {
+            var products = db.Products.Where(x => x.Product_Name.Contains(item)).ToList();
+
+            return View("Products", products);
+        
+        }
     }
 }

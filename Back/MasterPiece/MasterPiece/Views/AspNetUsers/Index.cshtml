@@ -4,7 +4,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
+@section Search
+    {
+@using (Html.BeginForm("Search", "AspNetUsers", "", FormMethod.Post, new { @class = "d-none d-md-flex ms-4" }))
+{
+    <input class="form-control bg-dark border-0" type="search" placeholder="Search by Email" name="SearchItem">
+}
+    }
 <div style="text-align:center">
     <h2>Users</h2>
 </div>
@@ -17,25 +23,25 @@
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Email)
-                                    </th>
+                            <tr>
+                                <th>#</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
 
 
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PhoneNumber)
-                                    </th>
-                                    <th>
-                                        First Name
-                                    </th>
-                                    <th>
-                                    Last Name                                    
-                                    </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th>
+                                    First Name
+                                </th>
+                                <th>
+                                    Last Name
+                                </th>
 
-                                   
-                                </tr>
+
+                            </tr>
                         </thead>
                         <tbody>
                             @{ int counter = 1; }
@@ -59,7 +65,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.last_Name)
                                     </td>
-                                  
+
                                 </tr>
                                 counter++;
                             }

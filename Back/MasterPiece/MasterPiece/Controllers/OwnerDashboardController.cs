@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
+    [CustomAuthorize(Roles = "Store")]
     public class OwnerDashboardController : Controller
     {
         // GET: OwnerDashboard
@@ -27,6 +28,13 @@ namespace MasterPiece.Controllers
             ViewBag.Category_id = new SelectList(db.Categories, "Category_id", "Category_Name");
             ViewBag.Store_id = new SelectList(db.Stores, "Store_id", "Store_Name");
             return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Search(string SearchItem)
+        {
+            int storeid = Convert.ToInt32(Session["LoggedStoreId"]);
+
+            return View("Index",db.Products.Where(x => x.Store_id == storeid && x.isDeleted != true && x.Product_Name.Contains(SearchItem) ).ToList());
         }
 
         [HttpPost]
@@ -192,6 +200,7 @@ namespace MasterPiece.Controllers
                 }
                 store.Store_Name = Request["Store_Name"];
                 store.Owner_Name = Request["Owner_Name"];
+                Session["LggedStore"] = store;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Profile");
             }

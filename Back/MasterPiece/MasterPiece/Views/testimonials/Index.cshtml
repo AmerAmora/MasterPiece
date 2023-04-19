@@ -27,6 +27,13 @@
 <div style="text-align:center">
     <h2>Testimonials</h2>
 </div>
+@section search
+    {
+    @using (Html.BeginForm("Search", "testimonials", "", FormMethod.Post, new { @class = "d-none d-md-flex ms-4" }))
+    {
+        <input class="form-control bg-dark border-0" type="search" placeholder="Search By Name Or Message" name="SearchItem" style="width:260px">
+    }
+}
 @*<div style="display: flex; justify-content: start;"><a href="../Products/Create">&nbsp &nbsp &nbsp &nbsp New Product</a></div>*@
 
 <div class="container-fluid pt-4 px-4">
@@ -63,14 +70,14 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.userMessage)
                                     </td>
-                                   
+
                                     <td>
                                         <img src="../../assets/img/@item.userImage" class="thumbnail" width="50px" height="50px" />
                                     </td>
                                     <td>
                                         @if (item.isAccepted == true)
                                         {
-                                                <span class="badge btn-success">Accepted</span>
+                                            <span class="badge btn-success">Accepted</span>
                                         }
                                         else if (item.isAccepted == false)
                                         {

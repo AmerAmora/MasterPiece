@@ -11,7 +11,7 @@ namespace MasterPiece.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class AspNetUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,7 +25,7 @@ namespace MasterPiece.Models
             this.Stores = new HashSet<Store>();
             this.Transactions = new HashSet<Transaction>();
         }
-    
+
         public string Id { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -43,7 +43,7 @@ namespace MasterPiece.Models
         public string StreetAddress { get; set; }
         public string city { get; set; }
         public string ZipCode { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

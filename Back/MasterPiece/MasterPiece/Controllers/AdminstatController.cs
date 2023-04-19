@@ -7,6 +7,8 @@ using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
+
     public class AdminstatController : Controller
     {
         private MasterPieceEntities db = new MasterPieceEntities();

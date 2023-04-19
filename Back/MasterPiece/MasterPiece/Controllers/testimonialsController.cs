@@ -3,11 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
+
     public class testimonialsController : Controller
     {
         private MasterPieceEntities db = new MasterPieceEntities();
@@ -17,7 +20,11 @@ namespace MasterPiece.Controllers
         {
             return View(db.testimonials.ToList());
         }
-
+        [HttpPost]
+        public async Task<ActionResult> Search(string SearchItem)
+        {
+            return View("Index", await db.testimonials.Where(x => x.userMessage.Contains(SearchItem)||x.UserName.Contains(SearchItem)).ToListAsync());
+        }
         // GET: testimonials/Details/5
         public ActionResult Details(int id)
         {

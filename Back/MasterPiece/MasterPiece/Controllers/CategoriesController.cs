@@ -9,6 +9,8 @@ using System.Web.Mvc;
 
 namespace MasterPiece.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
+
     public class CategoriesController : Controller
     {
         private MasterPieceEntities db = new MasterPieceEntities();
@@ -18,6 +20,12 @@ namespace MasterPiece.Controllers
         {
             return View(await db.Categories.Where(x=>x.isDeleted !=true).ToListAsync());
         }
+        [HttpPost]
+        public async Task<ActionResult> Search(string SearchItem)
+        {
+            return View("Index",await db.Categories.Where(x => x.isDeleted != true&& x.Category_Name.Contains(SearchItem)).ToListAsync());
+        }
+
 
         // GET: Categories/Details/5
         public async Task<ActionResult> Details(int? id)
