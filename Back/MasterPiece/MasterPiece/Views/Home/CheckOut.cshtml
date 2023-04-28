@@ -176,7 +176,7 @@
 
             <div class="col-md-8">
 
-
+                @using (Html.BeginForm("CheckOutItems", "Home",FormMethod.Post)) {
                 <div class="card p-3">
 
                     <h6 class="text-uppercase">Payment details</h6>
@@ -224,12 +224,12 @@
                         <div class="row mt-3">
                             <div class="col-md-6">
 
-                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required" value="@Model.ZipCode"> <span>Zip code</span> </div>
-                                
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="zipCode" class="form-control" required="required" value="@Model.ZipCode"> <span>Zip code</span> </div>
+
                             </div>
                             <div class="col-md-6" style="margin-top:12px;">
 
-                                <div class="select-dropdown">
+                                <div class="select-dropdown" name="City">
                                     <select>
                                         <option value="Option 1">City</option>
                                         <option value="Irbid">Irbid</option>
@@ -247,7 +247,7 @@
 
                             <div class="col-md-12">
 
-                                <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required" value="@Model.StreetAddress"> <span>Street Address</span> </div>
+                                <div class="inputbox mt-3 mr-2"> <input type="text" name="streetAddress" class="form-control" required="required" value="@Model.StreetAddress"> <span>Street Address</span> </div>
 
 
                             </div>
@@ -257,22 +257,21 @@
                         </div>
 
                     </div>
+                    <div class="mt-4 mb-4 d-flex justify-content-between">
+
+
+                        <a style="color:darkred; " href="@Url.Action("Cart","Home","")">Back To Cart</a>
+
+
+                        <input type="submit" class="btn btn-success px-3" style="background-color:green; border:0px;" value="Pay @ViewBag.TotalPrice JD">
+
+
+                    </div>
 
                 </div>
+                }
 
-
-                <div class="mt-4 mb-4 d-flex justify-content-between">
-
-
-                    <a style="color:darkred; " href="@Url.Action("Cart","Home","")">Back To Cart</a>
-
-
-                    <a href="@Url.Action("CheckOutItems","Home","")" class="btn btn-success px-3" style="background-color:green; border:0px;">Pay @ViewBag.TotalPrice JD</a>
-
-
-
-
-                </div>
+               
 
             </div>
 

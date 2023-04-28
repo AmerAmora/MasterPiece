@@ -113,8 +113,8 @@ namespace MasterPiece.Controllers
                         else {
                             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                             TempData["swal_message"] = $"Your account has been blocked please contact the staff ";
-                            ViewBag.title = "Error";
-                            ViewBag.icon = "error";
+                            TempData["title"] = "Error";
+                            TempData["icon"] = "error";
                             return View(model);
                         }
 
@@ -123,16 +123,16 @@ namespace MasterPiece.Controllers
                     {
                         AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                         TempData["swal_message"] = $"Your Request has been declined";
-                        ViewBag.title = "Error";
-                        ViewBag.icon = "error";
+                        TempData["title"] = "Error";
+                        TempData["icon"] = "error";
                         return View(model); 
                     }
                     else 
                     {
                         AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                         TempData["swal_message"] = $"Our team is reviewing your request please wait";
-                        ViewBag.title = "warning";
-                        ViewBag.icon = "warning";
+                        TempData["title"] = "warning";
+                        TempData["icon"] = "warning";
                         return View(model);
                     }
 

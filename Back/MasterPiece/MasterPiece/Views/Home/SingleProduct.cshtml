@@ -124,9 +124,9 @@
 {
     <script>
     swal({
-      title: "@ViewBag.title",
+      title: "@TempData["title"]",
       text: "@TempData["swal_message"]",
-      icon: "@ViewBag.icon"
+      icon: "@TempData["icon"]"
     });
     </script>
 }

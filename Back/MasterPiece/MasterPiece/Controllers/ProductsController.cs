@@ -133,8 +133,8 @@ namespace MasterPiece.Controllers
             if (featuredcount >= 3) 
             {
                 TempData["swal_message"] = $"You have reached the max amount of featured products";
-                ViewBag.title = "Error";
-                ViewBag.icon = "error";
+                TempData["title"] = "Error";
+                TempData["icon"] = "error";
                 return Redirect(Request.UrlReferrer.ToString());
 
             }

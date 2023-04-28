@@ -125,6 +125,7 @@ namespace MasterPiece.Controllers
                 newOrderDetail.Product_id = id;
                 newOrderDetail.Order_id = guid.ToString();
                 newOrderDetail.Quantity = quantity;
+                product.Quantity = product.Quantity - quantity;
                 db.Order_Details.Add(newOrderDetail);
                 db.SaveChanges();
                 rows = rows +
@@ -144,6 +145,11 @@ namespace MasterPiece.Controllers
             cart.Expires = DateTime.Now.AddDays(-1);
             Response.Cookies.Add(cart);
             db.Transactions.Add(newTransaction);
+            db.SaveChanges();
+            AspNetUser user = db.AspNetUsers.Find(User.Identity.GetUserId());
+            user.ZipCode = Request.Form["zipCode"];
+            user.StreetAddress = Request.Form["streetAddress"];
+            user.city = Request.Form["City"];
             db.SaveChanges();
             return RedirectToAction("Cart","Home","");
         }
@@ -208,6 +214,14 @@ namespace MasterPiece.Controllers
             if (Request.Cookies["cart"] != null)
             {
                 items = new List<string>(Request.Cookies["cart"].Value.Split('|'));
+                if (id != Convert.ToInt32(items[0].Split('|')[0].Split('_')[0]))
+                {
+                    TempData["title"] = "error";
+                    TempData["swal_message"] = "Can not add Items From More than one store";
+                    TempData["icon"] = "error";
+
+                    return Redirect(returnUrl);
+                }
             }
 
             // check if the item is already in the cart
@@ -223,7 +237,7 @@ namespace MasterPiece.Controllers
                     break;
                 }
             }
-
+            
             if (!itemFound)
             {
                 // add the new item to the cart with a quantity of 1
@@ -234,7 +248,9 @@ namespace MasterPiece.Controllers
             cart.Value = string.Join("|", items);
             cart.Expires = DateTime.Now.AddDays(7);
             Response.Cookies.Add(cart);
-
+            TempData["title"] = "Done";
+            TempData["swal_message"] = "Item Added to your cart Successfully";
+            TempData["icon"] = "success";
             // redirect back to the shopping cart view
             return Redirect(returnUrl);
         }
@@ -315,7 +331,6 @@ namespace MasterPiece.Controllers
             // return the updated cart quantity in JSON format
             return RedirectToAction("Cart");
         }
-
         public ActionResult Contact()
         {
 
@@ -326,8 +341,6 @@ namespace MasterPiece.Controllers
 
             return View();
         }
-
-
         public ActionResult Stores() 
         {
             var stores = db.Stores.Where(x=>x.isBlocked!=true&& x.isAccepted==true).ToList();
