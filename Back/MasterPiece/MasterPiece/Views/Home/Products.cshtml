@@ -46,7 +46,7 @@
                 <div class="col-lg-4 col-md-6 text-center @item.Category.Category_Name">
                     <div class="single-product-item">
                         <div class="product-image">
-                            <a href="@Url.Action("SingleProduct", "Home", new { id=item.Product_id})"><img src="../../ProductImage/@item.Product_Image" alt=""></a>
+                            <a href="@Url.Action("SingleProduct", "Home", new { id=item.Product_id})"><img src="~/ProductImage/@item.Product_Image" alt=""></a>
                         </div>
                         <h3>
                             @item.Product_Name
@@ -61,19 +61,7 @@
             }
         </div>
 
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="pagination-wrap">
-                    <ul>
-                        <li><a href="#">Prev</a></li>
-                        <li><a href="#" class="active">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 <!-- end products -->

@@ -208,6 +208,19 @@ namespace MasterPiece.Controllers
             return View(store);
         }
 
+        public ActionResult Orders()
+        {
+            int storeid = Convert.ToInt32(Session["LoggedStoreId"]);
+            var Orders = db.Orders.Where(x => x.Store_Id==storeid).ToList();
+
+            
+            return View(Orders);
+        }
+        public ActionResult OrderDetails(string id)
+        {
+            var OrderDetails = db.Order_Details.Where(x => x.Order_id==id).ToList();
+            return View(OrderDetails);
+        }
 
     }
 }

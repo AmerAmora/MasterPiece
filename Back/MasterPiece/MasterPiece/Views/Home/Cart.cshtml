@@ -55,14 +55,13 @@
                                     }
                                 }
 
-                                var minusBtnDisabled = quantity <= 1 ? "disabled" : "";
                                 <tr class="table-body-row">
                                     <td class="product-remove"><a href="RemoveItem/@item.Product_id"><i class="far fa-window-close"></i></a></td>
                                     <td class="product-image"><img src="../../ProductImage/@item.Product_Image" style="height: 60px; width: 60px;" alt=""></td>
                                     <td class="product-name">@item.Product_Name</td>
                                     <td class="product-price"><span id="price-@item.Product_id">@item.Product_Price</span> JD</td>
                                     <td class="product-quantity">
-                                        <button class="quantity-btn minus" data-product-id="@item.Product_id" data-cart-quantity="@quantity" @minusBtnDisabled>-</button>
+                                        <button class="quantity-btn minus" data-product-id="@item.Product_id" data-cart-quantity="@quantity" >-</button>
                                         <span type="number" class="quantity" id="quantity-@item.Product_id" data-product-id="@item.Product_id" data-cart-quantity="@quantity">@quantity</span>
                                         <button class="quantity-btn plus" data-product-id="@item.Product_id" data-cart-quantity="@quantity">+</button>
                                     </td>
@@ -130,77 +129,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-@*<script>
-        $(function () {
-            // handle the "+" and "-" button clicks
-            $('.quantity-btn').on('click', function () {
-                var $btn = $(this);
-                var productId = $btn.data('product-id');
-                var cartQuantity = parseInt($btn.data('cart-quantity'));
-                if ($btn.hasClass('plus')) {
-                    cartQuantity++;
-                } else {
-                    cartQuantity--;
-                    if (cartQuantity < 1) {
-                        cartQuantity = 1;
-                        return; // exit the function if cart quantity is less than 1
-                    }
-                }
-                // send an AJAX request to update the cart quantity
-                $.ajax({
-                    url: '/Home/UpdateCartQuantity',
-                    type: 'POST',
-                    data: { productId: productId, cartQuantity: cartQuantity },
-                    success: function (data) {
-                        // update the quantity displayed in the cart view
-                        $btn.siblings('.quantity').text(data.cartQuantity);
-                        $btn.data('cart-quantity', data.cartQuantity);
-                    },
-                    error: function () {
-                        alert('An error occurred while updating the cart quantity.');
-                    }
-                });
-                // update the cookie with the new quantity
-                var cart = getCookie('cart');
-                if (cart) {
-                    var items = cart.split('|');
-                    var newItems = [];
-                    for (var i = 0; i < items.length; i++) {
-                        var id = items[i].split('_')[0];
-                        var quantity = items[i].split('_')[1];
-                        if (id == productId) {
-                            quantity = cartQuantity;
-                        }
-                        newItems.push(id + '_' + quantity);
-                    }
-                    // set the updated cookie
-                    setCookie('cart', newItems.join('|'), 7);
-                }
-                // update the quantity displayed in the cart view
-                $btn.siblings('.quantity').text(cartQuantity);
-                $btn.data('cart-quantity', cartQuantity);
-            });
-            // helper functions to get and set cookies
-            function getCookie(name) {
-                var value = '; ' + document.cookie;
-                var parts = value.split('; ' + name + '=');
-                if (parts.length == 2) {
-                    return parts.pop().split(';').shift();
-                }
-            }
-
-            function setCookie(name, value, days) {
-                var expires = '';
-                if (days) {
-                    var date = new Date();
-                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                    expires = '; expires=' + date.toGMTString();
-                }
-                document.cookie = name + '=' + value + expires + '; path=/';
-            }
-        });
-
-    </script>*@
 <script>
     // Access the cookie data and parse the quantities for each product
     const cookieData = document.cookie;

@@ -67,16 +67,21 @@
                                 <li>
                                     @Html.ActionLink("Categories", "Categories", "Home")
                                 </li>
-                                @if (!Request.IsAuthenticated) { 
+                                <li>
+                                    @Html.ActionLink("Stores", "Stores", "Home")
+                                </li>
+                                @if (!Request.IsAuthenticated)
+                                {
                                     <li>
                                         @Html.ActionLink("Become A Partner", "ShopRegister", "Account")
 
                                     </li>
                                 }
-                                @if (Request.IsAuthenticated) {
-                                <li>
-                                    @Html.ActionLink("Profile", "Profile", "Home")
-                                </li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <li>
+                                        @Html.ActionLink("Profile", "Profile", "Home")
+                                    </li>
                                 }
                                 <li>
                                     @Html.Partial("_LoginPartial")

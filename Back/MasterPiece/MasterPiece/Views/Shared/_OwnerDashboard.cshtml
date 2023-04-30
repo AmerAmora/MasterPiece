@@ -63,12 +63,14 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="@Url.Action("StoreSales","OwnerDashboard")" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="../OwnerDashboard/Index" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Products</a>
-                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
-                    {
-                    @Html.AntiForgeryToken()
+                    <a href="@Url.Action("Index","OwnerDashboard")" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Products</a>
+                    <a href="@Url.Action("Orders","OwnerDashboard")" class="nav-item nav-link "><i class="fa fa-th me-2"></i>Orders</a>
 
-                    <a class="nav-item nav-link" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa-solid fa-right-from-bracket"></i> Log off</a>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <a class="nav-item nav-link" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa-solid fa-right-from-bracket"></i> Log off</a>
 
                     }
                 </div>

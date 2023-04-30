@@ -12,7 +12,8 @@
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
                     <p>As good as it gets</p>
-                    <h1>Products</h1>
+                    <h1>@if(Model.FirstOrDefault() !=null){ <span> @Model.FirstOrDefault().Category.Category_Name</span>}
+                    </h1>
                 </div>
             </div>
         </div>
@@ -45,19 +46,7 @@
             }
         </div>
 
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="pagination-wrap">
-                    <ul>
-                        <li><a href="#">Prev</a></li>
-                        <li><a href="#" class="active">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

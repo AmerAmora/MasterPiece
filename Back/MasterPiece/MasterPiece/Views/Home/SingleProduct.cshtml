@@ -74,11 +74,16 @@
                 <h1 style="color:darkred">Comments</h1>
                 @foreach (var item in Model.Item1)
                 {
-                    <div class="comment mt-4 text-justify float-left" style="width: 600px; overflow: hidden; word-wrap: break-word; white-space: pre-wrap;">
+                    <div class="comment mt-4 text-justify float-left" style="width: 600px; height:150px; overflow: hidden; word-wrap: break-word;">
                         <h4>@item.AspNetUser.first_Name @item.AspNetUser.last_Name</h4>
                         <span class="time">@item.commentDate</span>
+                        @if (User.IsInRole("Admin")) { 
+                        <a href="@Url.Action("DeleteComment", "Home", new {Id=item.Comment_id, returnUrl = Request.RawUrl })">
+                            <i class="far fa-window-close"></i>
+                        </a>
+                        }
                         <br>
-                        <p>@item.Comment_text</p>
+                        <p style="padding-top:30px">@item.Comment_text</p>
                     </div>
 
                 }

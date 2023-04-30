@@ -1,0 +1,51 @@
+﻿@model MasterPiece.Models.Comment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment_text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment_text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Product_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Product_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Comment_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

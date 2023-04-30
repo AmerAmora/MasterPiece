@@ -45,13 +45,13 @@
                         <div class="form-row">
                             <div class="name">Owner Name</div>
                             <div class="value">
-                                <input class="input--style-6" data-val="true" data-val-email="The First Name field is not a valid e-mail address." data-val-required="The firstName field is required." id="owerName" name="owerName" placeholder="Owner Name" type="text" value="" />
+                                <input required class="input--style-6" data-val="true" data-val-email="The First Name field is not a valid e-mail address." data-val-required="The firstName field is required." id="owerName" name="owerName" placeholder="Owner Name" type="text" value="" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="name">Store Name</div>
                             <div class="value">
-                                <input class="input--style-6" data-val="true" data-val-email="The Last Name field is not a valid e-mail address." data-val-required="The firstName field is required." id="storeName" name="storeName" placeholder="Store Name" type="text" value="" />
+                                <input required class="input--style-6" data-val="true" data-val-email="The Last Name field is not a valid e-mail address." data-val-required="The firstName field is required." id="storeName" name="storeName" placeholder="Store Name" type="text" value="" />
                             </div>
                         </div>
                         <div class="form-row">
@@ -59,6 +59,8 @@
                             <div class="value">
                                 <div class="input-group">
                                     @Html.TextBoxFor(m => m.Email, new { @class = "input--style-6", @placeholder = "Email" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                         </div>
@@ -67,6 +69,8 @@
                             <div class="value">
                                 <div class="input-group">
                                     @Html.PasswordFor(m => m.Password, new { @class = "input--style-6", @placeholder = "Password" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                         </div>
@@ -75,6 +79,8 @@
                             <div class="value">
                                 <div class="input-group">
                                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input--style-6", @placeholder = "Confrim Password" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                         </div>
@@ -83,7 +89,7 @@
                             <div class="name">Store Image</div>
                             <div class="value">
                                 <div class="input-group js-input-file">
-                                    <input type="file" class="input-file" id="file" name="Store_Image" accept=".jpg">
+                                    <input type="file" class="input-file" id="file" name="Store_Image" accept=".jpg" required>
                                     <label class="label--file" for="file">Choose file</label>
                                     <span class="input-file__info">No file chosen</span>
                                 </div>
@@ -94,7 +100,7 @@
                             <div class="name">Store Commercial Record</div>
                             <div class="value">
                                 <div class="input-group js-input-file">
-                                    <input type="file" class="input-file" id="Comm" name="Commercial_Record" accept=".pdf,.docx">
+                                    <input type="file" class="input-file" id="Comm" name="Commercial_Record" accept=".pdf,.docx" required>
                                     <label class="label--file" for="Comm">Choose file</label>
                                     <span class="input-file__info">No file chosen</span>
                                 </div>

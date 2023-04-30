@@ -174,6 +174,7 @@
     <Compile Include="Controllers\AdminstatController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OwnerDashboardController.cs" />
@@ -757,6 +758,13 @@
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Home\Orders.cshtml" />
     <Content Include="Views\Home\OrderDetails.cshtml" />
+    <Content Include="Views\OwnerDashboard\Orders.cshtml" />
+    <Content Include="Views\OwnerDashboard\OrderDetails.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
     <None Include="Views\Shared\NoAccess.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

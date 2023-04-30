@@ -22,25 +22,25 @@
                         <h3>Add Product</h3>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="Product_Name" name="Product_Name" placeholder="jhondoe">
+                        <input type="text" class="form-control" id="Product_Name" name="Product_Name" placeholder="jhondoe" required>
                         <span class="field-validation-valid text-danger" data-valmsg-for="Product_Name" data-valmsg-replace="true"></span>
 
                         <label for="floatingText">Name</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="Number" class="form-control" data-val="true" data-val-number="The field Product_Price must be a number." id="Product_Price" name="Product_Price" placeholder="price">
+                        <input required type="Number" class="form-control" data-val="true" data-val-number="The field Product_Price must be a number." id="Product_Price" name="Product_Price" placeholder="price">
                         <span class="field-validation-valid text-danger" data-valmsg-for="Product_Price" data-valmsg-replace="true"></span>
 
                         <label for="floatingText">Price</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="Number" class="form-control" data-val="true" data-val-number="The field Quantity must be a number." id="Quantity" name="Quantity" placeholder="price">
+                        <input required type="Number" class="form-control" data-val="true" data-val-number="The field Quantity must be a number." id="Quantity" name="Quantity" placeholder="price">
                         <span class="field-validation-valid text-danger" data-valmsg-for="Product_Price" data-valmsg-replace="true"></span>
 
                         <label for="floatingText">Quantity</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="Product_Description" name="Product_Description" placeholder="jhondoe">
+                        <input required type="text" class="form-control" id="Product_Description" name="Product_Description" placeholder="jhondoe">
                         <span class="field-validation-valid text-danger" data-valmsg-for="Product_Description" data-valmsg-replace="true"></span>
                         <label for="floatingText">Description</label>
                     </div>
@@ -50,7 +50,7 @@
                     @Html.ValidationMessageFor(model => model.Category_id, "", new { @class = "text-danger" })
                     <br />
 
-                    <input type="file" class="form-control bg-dark" id="Product_Image" name="Product_Image" accept="image/*">
+                    <input type="file" class="form-control bg-dark" id="Product_Image" name="Product_Image" accept="image/*" required>
                     <span class="field-validation-valid text-danger" data-valmsg-for="Product_Image" data-valmsg-replace="true"></span>
 
                     <BR />

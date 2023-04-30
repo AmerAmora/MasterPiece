@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MasterPiece.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .thumbnail {
+        top: -50px;
+        left: -35px;
+        display: block;
+        z-index: 999;
+        cursor: pointer;
+        -webkit-transition-property: all;
+        -webkit-transition-duration: 0.7s;
+        -webkit-transition-timing-function: ease;
+    }
+        /*change the number below to scale to the appropriate size*/
+        .thumbnail:hover {
+            transform: scale(3);
+        }
+    table#comments-table td.comment {
+        width: 300px;
+        
+    }
+</style>
+<div style="text-align:center">
+    <h2>Comments</h2>
+</div>
+<br />
+<div style="display: flex; justify-content: start;"><a href="../Categories/Create">&nbsp &nbsp &nbsp &nbsp New Category</a></div>
+
+@section Search
+    {
+    @using (Html.BeginForm("Search", "Categories", "", FormMethod.Post, new { @class = "d-none d-md-flex ms-4" }))
+    {
+        <input class="form-control bg-dark border-0" type="search" placeholder="Search by Name" name="SearchItem">
+    }
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Products</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="comments-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Comment</th>
+                                <th scope="col">Date</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int counter = 1; }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@counter</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AspNetUser.first_Name)
+                                        @Html.DisplayFor(modelItem => item.AspNetUser.last_Name)
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Product.Product_Name)
+
+                                    </td>
+                                    <td class="comment">
+                                        @Html.DisplayFor(modelItem => item.Comment_text)
+
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.commentDate)
+
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Comment_id })
+                                    </td>
+                                </tr>
+                                counter++;
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
