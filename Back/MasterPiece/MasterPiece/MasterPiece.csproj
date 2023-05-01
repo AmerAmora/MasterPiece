@@ -357,6 +357,7 @@
     <Content Include="assets\img\products\MousePad.png" />
     <Content Include="assets\img\products\PcAccess.png" />
     <Content Include="assets\img\products\WebCam.png" />
+    <Content Include="assets\img\SingleProductImage.jpg" />
     <Content Include="assets\img\team\me.jpg" />
     <Content Include="assets\img\team\team-1.jpg" />
     <Content Include="assets\img\team\team-2.jpg" />

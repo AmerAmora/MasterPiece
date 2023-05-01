@@ -41,7 +41,7 @@
                                 var cartCookie = Request.Cookies["cart"].Value;
                                 var quantity = 0;
 
-                                if (cartCookie !=null)
+                                if (cartCookie != null)
                                 {
                                     var cartItems = cartCookie.Split('|');
                                     for (var i = 0; i < cartItems.Length; i++)
@@ -61,12 +61,12 @@
                                     <td class="product-name">@item.Product_Name</td>
                                     <td class="product-price"><span id="price-@item.Product_id">@item.Product_Price</span> JD</td>
                                     <td class="product-quantity">
-                                        <button class="quantity-btn minus" data-product-id="@item.Product_id" data-cart-quantity="@quantity" >-</button>
+                                        <button class="quantity-btn minus" data-product-id="@item.Product_id" data-cart-quantity="@quantity">-</button>
                                         <span type="number" class="quantity" id="quantity-@item.Product_id" data-product-id="@item.Product_id" data-cart-quantity="@quantity">@quantity</span>
                                         <button class="quantity-btn plus" data-product-id="@item.Product_id" data-cart-quantity="@quantity">+</button>
                                     </td>
                                 </tr>
-                                totalprice = totalprice + Convert.ToDouble(item.Product_Price)*quantity;
+                                totalprice = totalprice + Convert.ToDouble(item.Product_Price) * quantity;
                             }
 
                         </tbody>
@@ -243,3 +243,14 @@
     }
 
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (TempData["swal_message"] != null)
+{
+    <script>
+    swal({
+      title: "@TempData["title"]",
+      text: "@TempData["swal_message"]",
+      icon: "@TempData["icon"]"
+    });
+    </script>
+}

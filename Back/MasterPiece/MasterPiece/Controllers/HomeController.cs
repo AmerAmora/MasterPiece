@@ -151,7 +151,12 @@ namespace MasterPiece.Controllers
             user.StreetAddress = Request.Form["streetAddress"];
             user.city = Request.Form["City"];
             db.SaveChanges();
+            TempData["title"] = "Done";
+            TempData["swal_message"] = "Your Order has been places successfully ";
+            TempData["icon"] = "success";
             return RedirectToAction("Cart","Home","");
+
+
         }
 
         public ActionResult Categories()

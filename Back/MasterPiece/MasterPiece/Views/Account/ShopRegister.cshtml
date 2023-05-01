@@ -26,14 +26,18 @@
 
 <body>
 
-    <div class="page-wrapper bg-dark p-t-100 p-b-50">
+    <div class="page-wrapper p-t-100 p-b-50" style="background-image: url('../../assets/img/aboutusbackground.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; ">
         <div class="wrapper wrapper--w900">
+            <div style="display:flex; align-content:center;justify-content:center;">
+                <a href="@Url.Action("Index","Home")">
+                    <img src="~/assets/img/noCatsLogo.png" style="width:100px;height:100px" id="Logo" alt="">
+                </a>
+
+            </div>
             <div class="card card-6">
                 <div class="card-heading">
                     <h2 class="title">
-                        <a href="@Url.Action("Index","Home")">
-                            <img src="~/assets/img/noCatsLogo.png" style="width:50px;height:50px" id="Logo" alt="">
-                            </a>
+                       
                         Register Your Store
                     </h2>
                 </div>

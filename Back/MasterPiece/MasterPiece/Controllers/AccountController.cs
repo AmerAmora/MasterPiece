@@ -54,6 +54,7 @@ namespace MasterPiece.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        [CustomAuthorize]
         public ActionResult Login(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
@@ -190,7 +191,7 @@ namespace MasterPiece.Controllers
             }
         }
         [AllowAnonymous]
-
+        [CustomAuthorize]
         public ActionResult ShopRegister()
         {
             if (User.Identity.IsAuthenticated)
@@ -251,6 +252,7 @@ namespace MasterPiece.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [CustomAuthorize]
         public ActionResult Register()
         {
             if (User.Identity.IsAuthenticated)

@@ -17,7 +17,7 @@
     }
 </style>
 
-<div class="breadcrumb-section breadcrumb-bg">
+<div class="breadcrumb-section breadcrumb-bg" style=" background-image: url('../../assets/img/singleproductimage.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; ">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
@@ -45,9 +45,7 @@
                     <p class="single-product-pricing"> @Model.Item2.Product_Price JD</p>
                     <p>@Model.Item2.Product_Description</p>
                     <div class="single-product-form">
-                        <form action="index.html">
-                            <input type="number" placeholder="1">
-                        </form>
+
                         <a href="@Url.Action("AddItem","Home" ,new { Id =Model.Item2.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                         <p><strong>Category: </strong>Mouse</p>
                     </div>
