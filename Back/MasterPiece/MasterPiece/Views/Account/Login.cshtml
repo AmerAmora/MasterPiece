@@ -43,11 +43,11 @@
                             <h3 class="mb-4 text-center">Have an account?</h3>
                             <form action="#" class="signin-form">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control",@placeholder="Email" })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
                                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>

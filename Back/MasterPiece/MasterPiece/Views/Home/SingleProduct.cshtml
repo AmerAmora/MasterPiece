@@ -47,15 +47,9 @@
                     <div class="single-product-form">
 
                         <a href="@Url.Action("AddItem","Home" ,new { Id =Model.Item2.Product_id , returnUrl = Request.RawUrl })" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-                        <p><strong>Category: </strong>Mouse</p>
+                        <p><strong>Category: </strong>@Model.Item2.Category.Category_Name</p>
                     </div>
-                    <h4>Share:</h4>
-                    <ul class="product-share">
-                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                        <li><a href=""><i class="fab fa-linkedin"></i></a></li>
-                    </ul>
+                    
                 </div>
             </div>
         </div>

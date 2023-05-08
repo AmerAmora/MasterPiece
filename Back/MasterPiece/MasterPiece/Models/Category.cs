@@ -11,7 +11,8 @@ namespace MasterPiece.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace MasterPiece.Models
         {
             this.Products = new HashSet<Product>();
         }
-    
+        
         public int Category_id { get; set; }
         public string Category_Name { get; set; }
         public string Category_Image { get; set; }

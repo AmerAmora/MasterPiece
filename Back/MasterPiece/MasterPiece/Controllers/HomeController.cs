@@ -152,7 +152,7 @@ namespace MasterPiece.Controllers
             user.city = Request.Form["City"];
             db.SaveChanges();
             TempData["title"] = "Done";
-            TempData["swal_message"] = "Your Order has been places successfully ";
+            TempData["swal_message"] = "Your Order has been placed successfully ";
             TempData["icon"] = "success";
             return RedirectToAction("Cart","Home","");
 
@@ -415,7 +415,7 @@ namespace MasterPiece.Controllers
             db.SaveChanges();
             return View();
         }
-        [Authorize(Roles = "User")]
+        [CustomAuthorize(Roles = "User")]
 
         public ActionResult Profile() 
         {
